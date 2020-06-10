@@ -42,7 +42,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`Id`, `Nombres`, `Correo`) VALUES
-(1, 'jhosmar', '12345');
+(1, 'diego', '12345');
 
 -- --------------------------------------------------------
 
