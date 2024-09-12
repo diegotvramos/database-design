@@ -1,105 +1,74 @@
--- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2020 a las 22:58:52
--- Versión del servidor: 10.4.6-MariaDB
--- Versión de PHP: 7.1.31
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+# Diseño de Bases de Datos
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+## Conceptos Básicos
 
---
--- Base de datos: `registro`
---
-CREATE DATABASE IF NOT EXISTS `registro` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `registro`;
+El mundo moderno está centrado en la información y los datos "Big Data" la Ia(alaliza toda la información que está en la base de datos y nos responde según a eso) 
 
--- --------------------------------------------------------
+Hay 2 conceptos que debemos entender ¿Cuál es la diferencia entre `datos` e `información`?
 
---
--- Estructura de tabla para la tabla `persona`
---
+**Dato**
+> _es la minima unidad de información(por si solo, no tiene un valor intrínseco)_ ej 38 (significa muchas cosas)
 
-DROP TABLE IF EXISTS `persona`;
-CREATE TABLE `persona` (
-  `Id` int(20) NOT NULL,
-  `Nombres` varchar(100) NOT NULL,
-  `Correo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+**Información**
 
---
--- Volcado de datos para la tabla `persona`
---
+> _Es un conjunto de datos que nos va a generar conocimiento_ eje: Mi nombre es ALLIE Y TENGO 29 AÑOS.
 
-INSERT INTO `persona` (`Id`, `Nombres`, `Correo`) VALUES
-(1, 'diego', '12345');
+en tonces la informacion ya tiene un contexto.
 
--- --------------------------------------------------------
+**¿Qué es una Base de datos?**
 
---
--- Estructura de tabla para la tabla `usuario`
---
+Es una colección de información organizada en un sistema(una pequeña libreta o cuaderno) antes la contabilidad se llenaba en libros contables ahora se a automatizado con Google sheet, excel y demás.
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `Id_Usuario` int(11) NOT NULL,
-  `DNI` text NOT NULL,
-  `Nombres` text NOT NULL,
-  `Fecha` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+La tecnologia que nos va permitir organizar los datos y representar la información esencial para un sistema de información se va denominar: Sistema Gestor de Base de Datos **`SGBD/DBMS`**(es un software que nos va permitir encapsular datos) y nos va permitir almacenarlo, recuperarlo, de editarlo, de conservarlo, de eliminarlos, etc.
 
---
--- Volcado de datos para la tabla `usuario`
---
+por lo tanto un **`SGBD/DBMS`** nos va permitir gestionar la información de una base de datos de forma digital.
 
-INSERT INTO `usuario` (`Id_Usuario`, `DNI`, `Nombres`, `Fecha`) VALUES
-(19, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '10/07/2022'),
-(20, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '11/07/2020'),
-(21, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '25/07/2020');
+nos ofrece:
 
---
--- Índices para tablas volcadas
---
+1. optimizacion para almacenar grandes cantidades de información.
+1. mayor seguridad y una administración eficiente
+1. manipulacion de la información de manera concurrente.
+1. Garantiza la integridad de los datos.
 
---
--- Indices de la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD PRIMARY KEY (`Id`);
+A el Sistema Gestor de Base de Datos **`SGBD/DBMS`** lo podemos clasificar en dos:
 
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`Id_Usuario`);
+- Sistemas gestores Relacionales(SQL).
+- Sistemas gestores No Relacionales(NoSQL).
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
+La mala elección de la base de datos puede darnos una larga lista de problemas durante el desarrollo de nuestras aplicaciones.
 
---
--- AUTO_INCREMENT de la tabla `persona`
---
-ALTER TABLE `persona`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+## Tipos de Base de Datos.
 
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-COMMIT;
+**Relacionales(SQL)** se organizan en un conjunto de tablas(filas y columnas) y se organizan a travez de identificadores la cual va establecer la relación entre otras tablas que forman parte de la base de datos. al hacer una consulta, demanda cierto procesamiento dependiendo de la complejidad del _query_
+>- MySQL
+>- MariaDB
+>- Postgres
+>- SqlServer
+>- Oracle
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+**No Relacionales(NoSQL)** Están diseñadas para modelar datos con estructuras más especificas y que no necesiten ser relacionados unos datos con otros. Cada entidad va funcionar de forma independiente. Es muy utilizado en el Big Data para sus análisis. Al no tener una estructura definida como las _relacionales_ se puede tener incluso redundancia de datos. no tardan mucho en responder. Los formatos que se utilizan es el de un documento(objeto organizado en claves y valores) que es muy parecido a Json.
+
+
+>- Bases de datos documentales.
+>- llave valor que trabajan con Graphos
+>- MongoDB
+>- Redis
+>- Apache Casandra
+>- Firebase
+>- FireStore.
+
+![alt text](image.png)
+
+mira que hay un documento por cada registro de la base de datos.
+
+## ¿Cuándo usar SQL y cuándo NoSQL? 
+
+
+
+
+
+
+
+
