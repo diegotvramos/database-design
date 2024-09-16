@@ -150,8 +150,135 @@ permite a los desarroladores entender como es que se relacionan y se utilizan en
 
 La logica de negocio puede ser reutilizada en diferentes partes de la aplicación, reduce el esfuerzo para implementar la misma lógica en múltiples lugares.
 
-> la parte más importante en una base de datos es su conceptualización y su modelo. para evitar el retrabajo.
+> la parte más importante en una base de datos es su conceptualización y su modelo, para evitar el retrabajo.
 
 ## Llaves.
 
+Hace único a un registro de información. 
+Tenemos 2 tipos:
 
+### Llaves Primarias (PK)
+
+Identifica un registro como único dentro de la entidad a la que pertenece. en el listado de atributos vamos a poner las siglas **PK** de **Primary Key** delante del atributo que sea llave principal. 
+
+¿Qué podria ser una llave principal?
+
+* ci (ya que es un número único para cada paersona)
+* Registro Universitaro.
+
+### Llaves Foraneas
+
+Relaciona los datos de un registro de una entidad con las de otra, o con un registro distinto de la misma entidad. En nuestro listado de atributos pondremos las siglas **FK** de **Foreign Key** delante del atributo que sea llave foránea.
+
+> EJEMPLO: hablando de los roles que podriamos tener en ese sistema de gestion escolar podria yo tener estudiantes, profesores y personal administrativo, entonces estos perfiles van a tener una llave, en la entidad que almacena las personas en lugar de ver el nombre de: _estudiantes, profesores y personal administrativo_ vamos a ver el Id(identificador) al que hace referencia,
+
+### Atributos únicos.
+
+En algunas ocaciones vamos a necesitar atributos únicos que no haya datos duplicados en la entidad, pero no son necesariamente una llave primaria o foranea.
+
+> **Ejemplo** para que un usuario no pueda crear 2 cuentas diferentes con un mismo **correo o número de teléfono**(muy comun cuando queremos darnos de alta en las redes sociales). Otro ejemplo seria el alias o el nombre de usuario que utilizas, los números de las placas de los vehiculos, nuestra CI, etc. Podrian ser consideradas Atributo único
+
+## Relaciones
+
+Las relaciones son las asociaciones que hacemos entre las entidades para poder recuperar y vincular los datos.
+
+Para crear una relación semántica utilizamos un **verbo** para relaciónar las entidades en cuestión.
+
+### Tipos de relaciones:
+
+* **1 a 1** cada Automobil tiene una única placa y cada placa pertenece a un único automobil.
+* **1 a M** una escuela puede tener muchos estudiantes, pero cada estudiante solo puede estar inscrito en una escuela específica.
+* **M a M** Un estudiante puede inscribirse en muchos cursos. y un curso puede tener muchos estudiantes inscritos. 
+>> Para manejar esta relación, normalmente se utiliza una tabla intermedia (también llamada tabla de unión o tabla de relación) que contiene las claves primarias de ambas tablas. Esto permite que cada estudiante pueda estar asociado con varios cursos y cada curso pueda tener varios estudiantes. (**tabla estudiantes, tabla cursos, tabla inscripciones**)
+
+>> no es muy comun(puede significar que lo tengas que volver a normalizar o usar el no relacional) pero lo puedes encontrar en estos casos, por ejemplo, en sistemas de gestión educativa, bibliotecas, o redes sociales.
+
+## Modelo Entidad relación.
+
+
+- **Modelo entidad-relación (MER)**: Se refiere al concepto teórico y abstracto que describe cómo las entidades (objetos o conceptos) y sus relaciones se estructuran en un sistema de base de datos. Es una representación conceptual que define las reglas y restricciones de los datos.
+
+- **Diagrama entidad-relación (DER)**: Se caracteriza por utilizar una serie de símbolos y reglas para representar los datos y sus relaciones. Con este modelo conseguimos representar de manera gráfica la estructura lógica de una base de datos.
+
+> En resumen, el **modelo** es la teoría y el **diagrama** es la visualización de esa teoría.
+
+![alt text](image-2.png)
+
+* Las entidades se representan con rectángulos.
+* Los atributos se representan con óvalos que se conectan a la entidad a la que pertenecen.
+* Los atributos que son llaves primarias se subrayan.
+* Las relaciones se representan con rombos que conectan a las entidades relacionadas, dentro del rombo se coloca el verbo que hace la relación entre las entidades.
+
+¿Quien va determinar la lógica de negocio? las personas encargadas de cada biblioteca.
+
+Hay una variante a este diagrama, que se llama **Modelo Relacional de la Base de Datos** que también ejemplifica gráficamente la relación de las entidades y la descripción de los atributos de estas.
+
+![alt text](image-3.png)
+
+Personalmente prefiero este tipo de diagrama por sobre el modelo entidad-relación, ya que nos permite describir el tipo de dato de cada atributo y se vuelve más fácil de manejar al tener cada entidad en una tabla con sus respectivos atributos.
+
+> dos palitos en intersectan se considera "uno" y la patita de gallo representa "muchos"
+
+Este tipo de diagramas lo puedes hacer con cualquier aplicación o software de diseño o diagramación, yo uso [draw.io](https://www.drawio.com/) que es gratuita.
+
+> una entidad en SQL relacional se convierte en Tablas, y una entidad en NoSql se convierte en Documento
+
+
+seria bueno tener información precargada de los catálogos.
+
+## Normalización de BD's
+
+La normalización de bases de datos es un proceso que se utiliza para organizar y optimizar la estructura de una base de datos para asegurar su integridad, evitar la redundancia y mejorar el rendimiento. La normalización consiste en la división de las entidades en varias entidades más pequeñas y relacionarlas mediante llaves foráneas.
+
+La normalización se realiza a través de varios niveles o formas, cada uno de los cuales representa un grado de descomposición de la entidad original. Los tres niveles más comunes de normalización son la Primera Forma Normal _(1FN)_, la Segunda Forma Normal _(2FN)_ y la Tercera Forma Normal _(3FN)_, aunque existen otros 2 niveles.
+
+El objetivo de la normalización es reducir la redundancia y garantizar la integridad de los datos al asegurar que cada dato solo se almacene en un solo lugar y que los datos sean consistentes y coherentes. La normalización también ayuda a mejorar el rendimiento de la base de datos, ya que reduce el tamaño y la complejidad de las entidades, lo que facilita la indexación y la búsqueda de información.
+
+Es importante tener en cuenta que la normalización puede tener un impacto en el rendimiento de la aplicación, ya que puede requerir una mayor cantidad de consultas y una complejidad adicional para recuperar y manipular datos. Por lo tanto, es importante encontrar un equilibrio entre la normalización y la eficiencia en el diseño de la base de datos.
+
+> tener muchas tablas pero tablas pequeñitas, si tu tienes una entidad muy grande es más complejo hacer operaciones sobre ellas.
+
+### Formas normales
+
+Las formas normales son estándares para la organización y modelamiento de datos en una base de datos relacional. En total existen 5 formas normales.
+
+1. **Primera Forma Normal (1FN):** Cada atributo de una entidad debe contener solo valores atómicos, es decir, valores indivisibles que no pueden ser divididos en atributos más pequeños.
+1. **Segunda Forma Normal (2FN):** Además de cumplir con la _1FN_, cada atributo no dependiente funcionalmente de la llave principal debe estar en una entidad separada.
+1. **Tercera Forma Normal (3FN):** Además de cumplir con la _2FN_, todas las dependencias funcionales deben ser eliminadas, es decir, no deben existir dependencias funcionales transitorias.
+1. **Cuarta Forma Normal (4FN):** También llamada de Forma Normal de _Boyce-Codd (FNBC)_, es una forma más restrictiva que la 3FN, donde se garantiza que no existan dependencias funcionales parciales o transitivas en la entidad.
+1. **Quinta Forma Normal (5FN):** También conocida como Forma Normal de _Domino-Clave (FNDC)_, en ella se debe garantizar que no haya dependencias múltiples de conjuntos en las entidades.
+
+> si tienes un indicativo de que estás normalizando hasta la 5ta forma, puede ser un sintoma de que no estas llevando correctamente el modelado 
+
+
+Al aplicar las formas normales a un modelo de base de datos, se puede asegurar que los datos sean consistentes, que no haya redundancia y que sea fácil de mantener y escalar.
+
+Sin embargo, también es importante tener en cuenta que la aplicación de formas normales más rigurosas puede resultar en una estructura de base de datos más compleja y menos eficiente en términos de rendimiento. Por lo tanto, es importante encontrar un equilibrio entre la integridad de los datos y la eficiencia en el diseño de un modelo de base de datos.
+
+--- 
+
+1. **Primera Forma Normal:** En la _1FN_, cada columna de una tabla debe contener únicamente valores atómicos, es decir, valores simples que no pueden ser divididos en partes más pequeñas.
+1. **Segunda Forma Normal:** La _2FN_ requiere que cada columna no dependiente funcionalmente de la clave primaria de una tabla sea movida a una tabla separada. Esto significa que cada tabla debe representar un solo hecho o concepto.
+1. **Tercera Forma Normal:** La _3FN_ requiere que todas las dependencias funcionales sean removidas de la tabla, es decir, que no haya redundancia de información.
+1. **Forma Normal de Boyce**-Codd: La _FNBC_ es una forma normal más rigurosa que la anteriores y requiere que cada dependencia funcional sea una clave candidata única.
+1. **Forma Normal de Dominio-Clave:** Esta forma normal (FNDC) es una extensiones de la _FNBC_ y se utiliza para asegurar la integridad de los datos en modelos de datos más complejos. No debe haber dependencias funcionales múltiples, es decir, una dependencia funcional en la que varios atributos dependen de una clave externa.
+
+segun Copilot
+
+¡Claro! Aquí tienes una explicación sencilla de las tres primeras formas normales al diseñar una base de datos:
+
+1. **Primera Forma Normal (1NF)**:
+   - **Regla**: Cada columna debe contener solo valores atómicos (indivisibles) y cada registro debe ser único.
+   - **Ejemplo**: Si tienes una tabla de estudiantes, cada celda debe contener solo un valor, como un solo número de teléfono por celda.
+
+2. **Segunda Forma Normal (2NF)**:
+   - **Regla**: Debe cumplir con 1NF y todos los atributos que no son clave deben depender completamente de la clave primaria.
+   - **Ejemplo**: Si tienes una tabla de pedidos, separa la información del cliente en otra tabla para que los datos del cliente no se repitan en cada pedido.
+
+3. **Tercera Forma Normal (3NF)**:
+   - **Regla**: Debe cumplir con 2NF y todos los atributos que no son clave deben ser independientes entre sí.
+   - **Ejemplo**: Si tienes una tabla de empleados, asegúrate de que la información del departamento esté en una tabla separada, para que los datos del departamento no dependan de otros atributos que no sean la clave primaria.
+
+Estas formas ayudan a organizar los datos de manera eficiente, reduciendo la redundancia y mejorando la integridad de la base de datos.
+
+## Normalizando un modelo parte I.
