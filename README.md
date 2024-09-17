@@ -281,4 +281,86 @@ segun Copilot
 
 Estas formas ayudan a organizar los datos de manera eficiente, reduciendo la redundancia y mejorando la integridad de la base de datos.
 
-## Normalizando un modelo parte I.
+## Normalizando un modelo parte I
+
+Ejemplo de normalización de base de datos:
+
+Tenemos una entidad desnormalizada de **"ventas"** de una tienda con la siguiente información:
+
+la estructura de datos de la base de datos relacional es como una tabla o una hoja de calculos(tiene filas y columnas)
+
+| Venta | Fecha | Cliente     | Correo                | Teléfono   | Dirección                 | Ciudad      | País    | Producto  | Precio    | Cantidad |
+| ----- | ----- | ----------- | --------------------- | ---------- | ------------------------- | ----------- | ------- | --------- | --------- | -------- |
+| 1     | 01/01 | Juan Perez  | juan.perez@gmail.com  | 72345678   | z.Yunguyo Calle 1 No.124  | La Paz      | Bolivia | Laptop    | 3800      | 2        |
+| 2     | 02/01 | Pedro Gomez | pedro.gomez@gmail.com | 77654321   | z.Ingenio Calle 2 No.234  | Sucre       | Bolivia | Celular   | 1600      | 3        |
+| 3     | 03/01 | Ana Silva   | ana.silva@gmail.com   | 79128734   | z.Satélite Calle 3 No.456 | Tarija      | Bolivia | Micrófono | 900       | 1        |
+| 4     | 04/01 | Ana Silva   | ana.silva@gmail.com   | 79128734   | z.Satélite Calle 3 No.567 | Tarija      | Bolivia | Laptop    | 7600      | 1        |
+| 5     | 05/01 | Juan Perez  | juan.perez@gmail.com  | 72345678   | z.Bautista Calle 4 No.678 | La Paz      | Bolivia | Micrófono | 500       | 3        |
+
+La **Primera forma normal** busca tener valores atómicos, es decir datos simples que no puedan ser divididos en parte más pequeñas, por lo que en el modelo anterior podríamos atomizar el nombre del cliente y su dirección quedando de la siguiente forma:
+
+| Venta | Fecha | Nombres  | Apellido  | Correo                | Teléfono | Zona       | Calle   | Número | Ciudad   | País    | Producto  | Precio  | Cantidad |
+| ----- | ----- | ---------| ----------| --------------------- | ---------| ---------  | --------| -------| ---------| ------- | --------- | --------| -------- |
+| 1     | 01/01 | Juan     | Perez     | juan.perez@gmail.com  | 72345678 | z.Yunguyo  | Calle 1 | No.124 | La Paz   | Bolivia | Laptop    | 3800    | 2        |
+| 2     | 02/01 | Pedro    | Gomez     | pedro.gomez@gmail.com | 77654321 | z.Ingenio  | Calle 2 | No.234 | Sucre    | Bolivia | Celular   | 1600    | 3        |
+| 3     | 03/01 | Ana      | Silva     | ana.silva@gmail.com   | 79128734 | z.Satélite | Calle 3 | No.456 | Tarija   | Bolivia | Micrófono | 900     | 1        |
+| 4     | 04/01 | Ana      | Silva     | ana.silva@gmail.com   | 79128734 | z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia | Laptop    | 7600    | 1        |
+| 5     | 05/01 | Juan     | Perez     | juan.perez@gmail.com  | 72345678 | z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia | Micrófono | 500     | 3        |
+
+
+**La segunda forma normal** se refiere a la eliminación de las dependencias funcionales parciales. En este caso, podemos identificar que los datos del cliente se duplican en las ventas.
+
+Por lo tanto, podemos crear una entidad separada llamada **"Clientes"** que almacene estos datos y en la entidad principal **"Ventas"** agregamos la llave foránea que haga referencia al cliente.
+
+| Venta | Fecha | Cliente | Producto  | Precio  | Cantidad |
+| ----- | ----- | ------- | --------- | --------| -------- |
+| 1     | 01/01 | 1       | Laptop    | 3800    | 2        |
+| 2     | 02/01 | 2       | Celular   | 1600    | 3        |
+| 3     | 03/01 | 3       | Micrófono | 900     | 1        |
+| 4     | 04/01 | 3       | Laptop    | 7600    | 1        |
+| 5     | 05/01 | 1       | Micrófono | 500     | 3        |
+
+
+| Cliente | Nombres  | Apellido  | Correo                | Teléfono | Zona       | Calle   | Número | Ciudad   | País    |
+| ------- | ---------| ----------| --------------------- | ---------| ---------  | --------| -------| ---------| ------- |
+| 1       | Juan     | Perez     | juan.perez@gmail.com  | 72345678 | z.Yunguyo  | Calle 1 | No.124 | La Paz   | Bolivia |
+| 2       | Pedro    | Gomez     | pedro.gomez@gmail.com | 77654321 | z.Ingenio  | Calle 2 | No.234 | Sucre    | Bolivia |
+| 3       | Ana      | Silva     | ana.silva@gmail.com   | 79128734 | z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia |
+| 1       | Juan     | Perez     | juan.perez@gmail.com  | 72345678 | z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia |
+
+Sin embargo al extraer los datos del cliente se genera duplicidad de información, ya que se detecta que un cliente puede tener más de una dirección, por lo que es necesario crear una entidad separada llamada **"Direcciones"** que almacene estos datos y en la entidad principal **"Ventas"** agregamos la llave foránea que haga referencia a dicha dirección y finalmente la entidad **"Clientes"** sólo quedaría con la información personal de la persona.
+
+Por lo que el modelo quedaría de la siguiente forma:
+
+| Venta | Fecha | Cliente | Dirección | Producto  | Precio  | Cantidad |
+| ----- | ----- | ------- | --------- | --------- | --------| -------- |
+| 1     | 01/01 | 1       |     1     | Laptop    | 3800    | 2        |
+| 2     | 02/01 | 2       |     2     | Celular   | 1600    | 3        |
+| 3     | 03/01 | 3       |     3     | Micrófono | 900     | 1        |
+| 4     | 04/01 | 3       |     3     | Laptop    | 7600    | 1        |
+| 5     | 05/01 | 1       |     4     | Micrófono | 500     | 3        |
+
+
+| Cliente | Nombres  | Apellido  | Correo                | Teléfono |
+| ------- | ---------| ----------| --------------------- | ---------|
+| 1       | Juan     | Perez     | juan.perez@gmail.com  | 72345678 |
+| 2       | Pedro    | Gomez     | pedro.gomez@gmail.com | 77654321 |
+| 3       | Ana      | Silva     | ana.silva@gmail.com   | 79128734 |
+
+
+|Dirección | Cliente |Zona       | Calle   | Número | Ciudad   | País    |
+|--------- | ------- |---------  | --------| -------| ---------| ------- |
+| 1        | 1       |z.Yunguyo  | Calle 1 | No.124 | La Paz   | Bolivia |
+| 2        | 2       |z.Ingenio  | Calle 2 | No.234 | Sucre    | Bolivia |
+| 3        | 3       |z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia |
+| 4        | 1       |z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia |
+
+**La tercer forma normal** exige que no haya transparencias funcionales. Esto se logra removiendo todas las dependencias transitivas, es decir, aquellas dependencias en las que un atributo depende indirectamente de otro a través de un tercer atributo.
+
+En este caso, la entidad **"Ventas"** ya está en la segunda forma normal, así que podemos continuar con la eliminación de dependencias transitivas.
+
+La entidad **"Ventas"** depende transitoriamente del **"Producto"** a través de **"Precio"**. Por lo tanto, debemos crear una entidad adicional para los **"Productos"** que incluya la información de estos.
+
+Por lo cual nuestro modelo quedaría de la siguiente forma:
+
+
