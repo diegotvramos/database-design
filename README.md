@@ -337,8 +337,8 @@ Por lo que el modelo quedaría de la siguiente forma:
 | 1     | 01/01 | 1       |     1     | Laptop    | 3800    | 2        |
 | 2     | 02/01 | 2       |     2     | Celular   | 1600    | 3        |
 | 3     | 03/01 | 3       |     3     | Micrófono | 900     | 1        |
-| 4     | 04/01 | 3       |     3     | Laptop    | 7600    | 1        |
-| 5     | 05/01 | 1       |     4     | Micrófono | 500     | 3        |
+| 4     | 04/01 | 3       |     3     | Laptop    | 3800    | 1        |
+| 5     | 05/01 | 1       |     4     | Micrófono | 900     | 3        |
 
 
 | Cliente | Nombres  | Apellido  | Correo                | Teléfono |
@@ -355,6 +355,8 @@ Por lo que el modelo quedaría de la siguiente forma:
 | 3        | 3       |z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia |
 | 4        | 1       |z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia |
 
+## Normalizando un modelo parte II
+
 **La tercer forma normal** exige que no haya transparencias funcionales. Esto se logra removiendo todas las dependencias transitivas, es decir, aquellas dependencias en las que un atributo depende indirectamente de otro a través de un tercer atributo.
 
 En este caso, la entidad **"Ventas"** ya está en la segunda forma normal, así que podemos continuar con la eliminación de dependencias transitivas.
@@ -362,5 +364,107 @@ En este caso, la entidad **"Ventas"** ya está en la segunda forma normal, así 
 La entidad **"Ventas"** depende transitoriamente del **"Producto"** a través de **"Precio"**. Por lo tanto, debemos crear una entidad adicional para los **"Productos"** que incluya la información de estos.
 
 Por lo cual nuestro modelo quedaría de la siguiente forma:
+
+| Venta | Fecha | Cliente | Dirección | Producto | Cantidad |
+| ----- | ----- | ------- | --------- | -------- | -------- |
+| 1     | 01/01 | 1       |     1     | 1        | 2        |
+| 2     | 02/01 | 2       |     2     | 2        | 3        |
+| 3     | 03/01 | 3       |     3     | 3        | 1        |
+| 4     | 04/01 | 3       |     3     | 1        | 1        |
+| 5     | 05/01 | 1       |     4     | 3        | 3        |
+
+
+| Producto | Producto  | Precio  
+| -------- | --------- | --------
+| 1        | Laptop    | 3800    
+| 2        | Celular   | 1600    
+| 3        | Micrófono | 900     
+
+
+| Cliente | Nombres  | Apellido  | Correo                | Teléfono |
+| ------- | ---------| ----------| --------------------- | ---------|
+| 1       | Juan     | Perez     | juan.perez@gmail.com  | 72345678 |
+| 2       | Pedro    | Gomez     | pedro.gomez@gmail.com | 77654321 |
+| 3       | Ana      | Silva     | ana.silva@gmail.com   | 79128734 |
+
+|Dirección | Cliente |Zona       | Calle   | Número | Ciudad   | País    |
+|--------- | ------- |---------  | --------| -------| ---------| ------- |
+| 1        | 1       |z.Yunguyo  | Calle 1 | No.124 | La Paz   | Bolivia |
+| 2        | 2       |z.Ingenio  | Calle 2 | No.234 | Sucre    | Bolivia |
+| 3        | 3       |z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia |
+| 4        | 1       |z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia |
+
+**La cuarta forma normal (Boyce-Codd)**, es más restrictiva con las dependencias transitivas, por lo que analizando la información del modelo detectamos que la entidad **"Direcciones"** sigue dependiendo del **"País"**, por lo que debemos crear una entidad adicional que contenga la información de dicho atributo.
+
+Finalmente la quinta forma normal **(Dominio-Clave)** exige eliminar cualquier dependencia funcional múltiple, pero en este modelo no existen por lo que también cumple con esta última forma normal.
+
+Al final de la normalización el modelo quedo de la siguiente manera:
+
+| Venta | Fecha | Cliente | Dirección | Producto | Cantidad |
+| ----- | ----- | ------- | --------- | -------- | -------- |
+| 1     | 01/01 | 1       |     1     | 1        | 2        |
+| 2     | 02/01 | 2       |     2     | 2        | 3        |
+| 3     | 03/01 | 3       |     3     | 3        | 1        |
+| 4     | 04/01 | 3       |     3     | 1        | 1        |
+| 5     | 05/01 | 1       |     4     | 3        | 3        |
+
+
+| Producto | Producto  | Precio  
+| -------- | --------- | --------
+| 1        | Laptop    | 3800    
+| 2        | Celular   | 1600    
+| 3        | Micrófono | 900     
+
+
+| Cliente | Nombres  | Apellido  | Correo                | Teléfono |
+| ------- | ---------| ----------| --------------------- | ---------|
+| 1       | Juan     | Perez     | juan.perez@gmail.com  | 72345678 |
+| 2       | Pedro    | Gomez     | pedro.gomez@gmail.com | 77654321 |
+| 3       | Ana      | Silva     | ana.silva@gmail.com   | 79128734 |
+
+|Dirección | Cliente |Zona       | Calle   | Número | Ciudad   | País |
+|--------- | ------- |---------  | --------| -------| ---------| ---- |
+| 1        | 1       |z.Yunguyo  | Calle 1 | No.124 | La Paz   | 1    |
+| 2        | 2       |z.Ingenio  | Calle 2 | No.234 | Sucre    | 1    |
+| 3        | 3       |z.Satélite | Calle 3 | No.567 | Tarija   | 1    |
+| 4        | 1       |z.Bautista | Calle 4 | No.678 | La Paz   | 1    |
+
+
+|País | Nombre  | Dominio | 
+| --- | ------- | ------- | 
+|1    | Bolivia | bo      | 
+
+
+tanto la entidad **"paises"** como la entidad **"productos"** esas podrian ser catálogos (ya tendria que tener precargado todo los productos)
+
+Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que vas a empesar a diseñar desde **0** es como la ingenieria inversa
+
+![alt text](image-4.png)
+
+## Modelo de datos desde 0
+
+Estos pasos te ayudaran mucho
+
+1. Identificar las entidades del sistema.
+1. Identificar los atributos de las entidades.
+1. Identificar las llaves primarias y foráneas.
+1. Asignar una nomenclatura adeacuada a las entidades y sus atributos.(no espacios)
+1. Identificar las entidades pivote del sistema.
+1. Identificar los catálogos del sistema.
+1. Identificar los tipos de relaciones del sistema.
+1. Crear el Modelo Entidad-Relación del sistema.
+1. Crear el Modelo Relacional de la base de datos del sistema.
+1. Identificar los tipos de dato de los atributos de las entidades del sistema.
+1. Identificar los atributos que puedan ser únicos en el sistema.
+1. Identificar las reglas de negocio (Operaciones _CRUD_) del sistema.
+
+Cuando sigas estos pasos de _modelado de datos_ al pie de la letra, vas a evitar el trabajo de normalización.
+
+>la normalizacion se aplica en un modelo existente.
+
+### Ejemplo I Modelado de Datos: Entidades y atributos
+
+te suguiero que hagas un modelado de datos de algo pequeño ejemplo: HOBIES si coleccionas juguetes, libros, revistas, base de datos para personajes de series. Que te hagas tu propio inventario. Te va a ayudar bastante
+
 
 
