@@ -443,7 +443,7 @@ Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que 
 
 ## Modelo de datos desde 0
 
-Estos pasos te ayudaran mucho
+**PASOS A SEGUIR:**
 
 1. Identificar las entidades del sistema.
 1. Identificar los atributos de las entidades.
@@ -458,13 +458,36 @@ Estos pasos te ayudaran mucho
 1. Identificar los atributos que puedan ser únicos en el sistema.
 1. Identificar las reglas de negocio (Operaciones _CRUD_) del sistema.
 
+## Glosario
+
+- **PK**: _Primary Key_
+- **FK**: _Foreign Key_
+- **ED**: Entidad de datos
+- **EP**: Entidad pivote
+- **EC**: Entida catálogo
+
 Cuando sigas estos pasos de _modelado de datos_ al pie de la letra, vas a evitar el trabajo de normalización.
 
 >la normalizacion se aplica en un modelo existente.
 
 ### Ejemplo I Modelado de Datos: Entidades y atributos
 
-te suguiero que hagas un modelado de datos de algo pequeño ejemplo: HOBIES si coleccionas juguetes, libros, revistas, base de datos para personajes de series. Que te hagas tu propio inventario. Te va a ayudar bastante
+te suguiero que hagas un modelado de datos de algo pequeño ejemplo: HOBIES si coleccionas juguetes, libros, revistas, base de datos para personajes de series. Que te hagas tu propio inventario. Te va a ayudar bastante.
+
+### Ejemplo I Modelado de Datos: Modelo E-R
+
+para el modelado vamos a usar una aplicación web llamada:
+
+[**DRAW.IO** 👈](https://www.drawio.com/)
+
+Sirve para hacer diagramas incluso para redes
+
+![alt text](image-5.png)
+
+"Suelo saltarme el diagrama _entidad-relación_ por que es más util el modelo relacional"
+
+
+### Ejemplo I Modelado de Datos: Modelo relacional de la DB
 
 
 
