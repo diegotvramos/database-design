@@ -465,6 +465,7 @@ Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que 
 - **ED**: Entidad de datos
 - **EP**: Entidad pivote
 - **EC**: Entida catálogo
+- **UQ**: _unique attribute_
 
 Cuando sigas estos pasos de _modelado de datos_ al pie de la letra, vas a evitar el trabajo de normalización.
 
@@ -490,4 +491,11 @@ Sirve para hacer diagramas incluso para redes
 ### Ejemplo I Modelado de Datos: Modelo relacional de la DB
 
 
+> En la base de datos podemos almacenar archivos binarios(multimedia) pero no es idal por que a la hora de consultarlo eso me va demandar mucho procesamiento de cómputo a la computadora donde esté la base de datos.
 
+> Cuando estamos haciendo referencia para almacenar elmenentos multimedia lo ideal es subirlo a un servidor(nuve) como (google drive, drobox) y copiar la url en la base de datos.
+
+
+![diagrama-terminado](Diagrama-e-r-taller-foto.png)
+
+### Ejemplo I Modelado de Datos: Regla de negocio y conclusiones.
