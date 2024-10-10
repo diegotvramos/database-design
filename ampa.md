@@ -170,3 +170,93 @@ una persona puede tener varior vehiculos, Observa eso. y un vehiculo puede tener
 > usa varchar() y no char. por que _char()_ reserva en memoria y varchar() no reserva espacio en memoria "se adapta"
 
 
+### Modelo Entidad - Relación
+![diagrama-terminado](image-5.png) 
+
+### Modelo Relacional de la DB
+
+![diagrama-terminado](Diagrama-e-r-taller-foto.png) 
+
+## Reglas de Negocio (va ser a nivel semantico)
+
+por cada entidad van a ir describiendo esas reglas de negocio que tenemos que establecer 
+
+
+### CONDUCTORES
+
+1. Crear el registro de conductore
+1. leer el registro de un(os) conductor(res) dada una condición en particular
+1. leer todo los registros de la entidad conductores
+1. Actualizar los datos de un conductor
+1. Eliminar los datos de un conductor dada una condición en particular
+
+
+### VEHICULOS
+
+1. Crear el registro de vehiculo
+1. leer el registro de un(os) vehiculo(s) dada una condición en particular
+1. leer todo los registros de la entidad vehiculos
+1. Actualizar los datos de un vehiculo
+1. Eliminar los datos de un vehiculo dada una condición en particular
+
+
+### ORDENES 
+
+1. Crear el registro de orden
+1. leer el registro de una(s) orden(es) dada una condición en particular
+1. leer todo los registros de la entidad ordenes
+1. Actualizar los datos de una orden
+1. Eliminar los datos de una orden dada una condición en particular
+
+
+### INSPECCIONES
+
+1. Crear el registro de inspecion
+1. leer el registro de una(s) inspeccion(es) dada una condición en particular
+1. Eliminar los datos de una inspeccion dada una condición en particular
+
+
+### Productos
+
+1. Crear el registro de producto
+1. leer el registro de un(os) producto(s) dada una condición en particular
+1. leer todo los registros de la entidad procuctos
+1. Actualizar los datos de un producto
+1. Eliminar los datos de un producto dada una condición en particular
+
+
+### Servicios
+
+1. Crear el registro de servicio
+1. leer el registro de un(os) servicio(s) dada una condición en particular
+1. leer todo los registros de la entidad servicios
+1. Actualizar los datos de un servicio
+1. Eliminar los datos de un servicio dada una condición en particular
+
+### MECÁNICOS
+
+1. Crear el registro de mecánico
+1. leer el registro de un(os) mecánico(s) dada una condición en particular
+1. leer todo los registros de la entidad mecanicos
+1. Actualizar los datos de un mecánico
+1. Eliminar los datos de un mecánico dada una condición en particular
+
+### Roles
+
+1. Crear el registro de rol
+1. leer el registro de un(os) rol(es) dada una condición en particular
+1. leer todo los registros de la entidad rol
+1. Actualizar los datos de un rol
+1. Eliminar los datos de un rol dada una condición en particular
+
+### Usuarios
+
+1. Crear el registro de usuario
+1. leer el registro de un(os) usuario(s) dada una condición en particular
+1. leer todo los registros de la entidad usuarios
+1. Actualizar los datos de un usuario
+1. Eliminar los datos de un usuario dada una condición en particular
+1. las contraseñas ¿las define el administrador o quien? -ver quien da las contraseñas en youbube-
+
+
+min 4:15

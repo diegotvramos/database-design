@@ -499,3 +499,4 @@ Sirve para hacer diagramas incluso para redes
 ![diagrama-terminado](Diagrama-e-r-taller-foto.png)
 
 ### Ejemplo I Modelado de Datos: Regla de negocio y conclusiones.
+
