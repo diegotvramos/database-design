@@ -225,7 +225,7 @@ por cada entidad van a ir describiendo esas reglas de negocio que tenemos que es
 1. Eliminar los datos de un producto dada una condición en particular
 
 
-### Servicios
+### Servicios **EC(entidad de tipo catálogo)**
 
 1. Crear el registro de servicio
 1. leer el registro de un(os) servicio(s) dada una condición en particular
@@ -257,6 +257,5 @@ por cada entidad van a ir describiendo esas reglas de negocio que tenemos que es
 1. Actualizar los datos de un usuario
 1. Eliminar los datos de un usuario dada una condición en particular
 1. las contraseñas ¿las define el administrador o quien? -ver quien da las contraseñas en youbube-
-
-
-min 4:15
+1. para que el usuario acceda al sistema, la contraseña y el usuario debe coincidir con que está en la base de datos.
+1. los usuarios son unicos, y no se podrán repetir

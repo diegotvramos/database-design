@@ -500,3 +500,52 @@ Sirve para hacer diagramas incluso para redes
 
 ### Ejemplo I Modelado de Datos: Regla de negocio y conclusiones.
 
+las reglas de negocio se van dando conforme tú vas creando las entidades.
+
+Las cinco reglas de negocio básicas son: el crud(incertar, actualizar, eliminar, buscar)
+
+Dependiendo de las necesidades de las reglas de negocio de tu sistema estas pueden aumentar, adicionalemente a estas cinco reglas básicas de CRUD otra podria ser ir a validar los datos enviados por el usuario -como contraseña y usuario- sean los mismos
+
+Ya cuando tienes las reglas de negocio escritas gramaticalmente, las pasas a código SQL pero eso siempre y cuando tu sistema gestor de base de datos vaya ser uno relacional porque sinó lo tendrias que convertir a código SQL.
+
+Antes de pasarte a código SQL o al código NoSQL es que vayas haciendo una hoja de cálculo -por entidad- y vayas incertando datos ya reales de manera que vayas haciendo una corrida de datos "sirve sobre todo en base de datos relacionales" 
+
+### Ejemplo Modelado de datos: Corrida de Datos
+
+¿Qué es una corrida de datos?
+
+Si ya estas seguro de la definición de tus entidades y que ya tiens bien claro los atributos que vas a guardar, la corrida de datos no es más que una simulación de datos.
+
+¿Qué es una entida de tipo catálogo?
+
+Cuando ya usemos el sistema, en las entidades tipo catálogo su contenido ya viene precargado.
+
+Ejemplo: la entidad paises, modelos de coche, ciudades, etc
+
+**Reglas de negocio**
+
+Regresando al sistema de autenticación; los passwords en nuestra base de datos deberán tener al menos 8 caracteres y de esos 8 caracteres uno tendrá que estár en mayusculas, como tal no se convierten en instrucciones sql tan literales como crear un registro, leer, eliminar o actualizar pero condiciona el almacenamiento de datos dentro de nuestras entidades, vean que las reglas de negocio no solo hacen referencia a las operaciones del CRUD sino tambien a esas validaciones que nuestra información tiene que cumplir antes de alimentar el sistema.
+
+**Guardando imágenes**
+
+aunque en una base de datos podemos guardar una imagen, video o audio, lo ideal es guardar el contenido multimedia en una nube o en un servidor de almacenamiento y simplemente en la base de datos guardar la URL de donde vamos a poder encontra ese archivo binario.
+
+**corriendo datos en una hoja de cálculo**
+
+la corrida de datos puede ser entre 5 a 10 registros, y te vas a dar cuenta si es que hay que modificar o no. Incluso aca ya puedes empesar a normalizar. Solo recuerda hacer **"los doce pasos a seguir (modelado desde cero)"** 
+
+Si eres inexperto, la corrida de datos te sirve para vislumbrar que la información se va guardar correctamente antes antes de pasar al siguiente paso que seria generar esto en base de datos ya sea SQL o NoSQL
+
+¿en que tipos de sistemas se necesita un modelo relacional?
+
+pues en sistemas(modelos) de transaciones donde debe hacer cálculos artiméticos que posteriormete genere datos dinámicos, entonces ahi si necesitamos una base relacional.
+
+
+
+### Ejemplo Modelado de Datos: Modelo Documental
+
+min 4:40
+
+
+
+
