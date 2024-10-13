@@ -540,11 +540,19 @@ Si eres inexperto, la corrida de datos te sirve para vislumbrar que la informaci
 
 pues en sistemas(modelos) de transaciones donde debe hacer cálculos artiméticos que posteriormete genere datos dinámicos, entonces ahi si necesitamos una base relacional.
 
+> generamé 10 mecánicos con estos datos respectivamente: mecanico_id,	nombre,	apellidos,	ci,	especialidad,	celular_num,	email,	fecha_ingreso,	direccion,	municipio,	ocupacion,	observaciones. toma en cuenta  que viven en los municipios de El Alto, Viacha y La Paz
 
+>generame 15 ordenes de trabajo para un taller mecánico con los siguientes datos respectivamente: orden_id,	fecha_entrada,	fecha_salida,	requerimiento,	descripcion,	estado,	conductor_id,	vehiculo_id,	mecanico_id. donde "estado" hay estas opciones: Pendiente, en proceso, finalizado, entregado, cancelado; donde "requerimiento" hay 3 opciones: Reparación o Mantenimiento o Ambos, donde "fecha_salida" hay que dar solo un estimado de la reparación. toma en cuenta que "conductor_id,	vehiculo_id,	mecanico_id" son las llaves foraneas, por favor hazlo en una tabla en lenguaje markdown
+
+> recueda asignar los trabajos a los mecánicos segun requerimiento de la orden. solo ponle el id_mecanico correspondiente.
+
+> Recuerda que tambien el id del conductor y el id del vehiculo deben ser coherentes respectivamente.
 
 ### Ejemplo Modelado de Datos: Modelo Documental
 
 min 4:40
+
+generar para la parte de "vehiculos"
 
 
 

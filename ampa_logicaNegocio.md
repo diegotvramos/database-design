@@ -51,12 +51,14 @@
 - fecha_salida (yo doy un estimado, solo cuando se le entrega el impreso va ser con la fecha actual)
 - requerimiento(Reparación/Mantenimiento/Ambos)
 - descripción
-- estado (Pendient, en proceso, finalizado, entregado, cancelado)
-- cliente_id **(FK)** (si ya lo tengo solo busco "¿Ya es cliente?")
+- estado (Pendiente, en proceso, finalizado, entregado, cancelado)
+- conductor_id **(FK)** (si ya lo tengo solo busco "¿Ya es cliente?")
 - vehiculo_id **(FK)** (te pide la placa)
 - mecanico_id **(FK)**
-- servicio_id **(FK)**
-- producto-id **(FK)**      
+
+
+❌ servicio_id **(FK)**
+❌ producto-id **(FK)**      
 
 
 ### INSPECCIONES
@@ -104,13 +106,14 @@
 - apellidos
 - ci
 - especialidad
-- teléfono
-- correo_electronico
+- celular_num
+- email/correo_electronico
 - fecha_ingreso
 - estado (activo e inactivo)
 - direccion
-- ciudad
+- municipio/ciudad
 - ocupacion (pintor, lijador, ayudante, mecánico, soldaror...)
+- foto
 - observaciones
 
 ### Roles/Administradores? (catálogo)
