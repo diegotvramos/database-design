@@ -1,7 +1,9 @@
-# Diseño de Bases de Datos
+# BASE DE DATOS - JON
+
+## Diseño de Bases de Datos
 
 
-## Conceptos Básicos
+### Conceptos Básicos
 
 El mundo moderno está centrado en la información y los datos "Big Data" la Ia(alaliza toda la información que está en la base de datos y nos responde según a eso) 
 
@@ -38,7 +40,7 @@ A el Sistema Gestor de Base de Datos **`SGBD/DBMS`** lo podemos clasificar en do
 
 La mala elección de la base de datos puede darnos una larga lista de problemas durante el desarrollo de nuestras aplicaciones.
 
-## Tipos de Base de Datos.
+### Tipos de Base de Datos.
 
 **Relacionales(SQL)** se organizan en un conjunto de tablas(filas y columnas) y se organizan a travez de identificadores la cual va establecer la relación entre otras tablas que forman parte de la base de datos. al hacer una consulta, demanda cierto procesamiento dependiendo de la complejidad del _query_
 >- MySQL
@@ -63,7 +65,7 @@ La mala elección de la base de datos puede darnos una larga lista de problemas 
 
 mira que hay un documento por cada registro de la base de datos.
 
-## ¿Cuándo usar SQL y cuándo NoSQL? 
+### ¿Cuándo usar SQL y cuándo NoSQL? 
 
 Dependerá del tipo de aplicación que querremos realizar.
 
@@ -79,13 +81,13 @@ Si nuestra aplicación necesita de un sistema que las tablas no se relacionen un
 Es su estructura en como almacenan los datos SQL utiliza una estructura organizada y relacional, las NoSQL utilizan una estructura más flexible y escalable.
 
 
-##  Entidades y Atributos
+###  Entidades y Atributos
 
 **Entidad** es un objeto del mundo real (persona, cueta, servicio, factura) es un objeto del cual nosotros vamos a almacenar una información, y al ser objetos tiene caracteristicas que las describen y a esas propiedades es lo que se les llama **atributos** de la entidad.
 
 > lo primero que debemos hacer al diseñar la base de datos es hacer un listado de las entidades y sus atributos.
 
-### Tipos de entidades
+#### Tipos de entidades
 
 * De Datos 
 * Catálogos
@@ -99,7 +101,7 @@ las **_entidades llamadas catálogos_**, la información ya debe estar precaptur
 
 Las **_entidades Pivote_** nos van a permitir hacer relación entre dos o más entidades tambien llamadas e_ntidades de enlace o entidades de asociación_
 
-### Tipos de datos (atributos)
+#### Tipos de datos (atributos)
 
 Los atributos al final se convierten en los tipos de datos que podemos almacenar.
 
@@ -127,7 +129,7 @@ Tambien se pueden guardar datos de geolocalización sobre todo modelos orientado
 
 Dependiendo de el gestor de bases de datos, puede haber muchas variantes respectos a los tipos de datos (te ofrecen una gran gama de datos), y estos son solo algunos ejemplos de los tipos de datos que se pueden almacenar y manejar en una base de datos. El tipo de datos que utilices depende de las necesidades específicas de la aplicación y de la naturaleza de los datos.
 
-## CRUD
+### CRUD
 
 **CRUD** Es un acrónimo(puede ser leida como cualquier otra palabra) se refiere a las 4 operaciónes básicas que se pueden realizar en una base de datos: **_crea(create), leer(read), actualizar(update), y eliminar(delete)_**
 
@@ -137,7 +139,7 @@ Estas operaciones se utilizan tanto en la administración de objetos y privilegi
 
 ![alt text](image-1.png)
 
-## Lógica de Negocio.
+### Lógica de Negocio.
 
 La lógica de negocios es el conjunto de reglas, políticas y procesos que describen cómo se lleva a cabo el negocio.
 
@@ -152,12 +154,12 @@ La logica de negocio puede ser reutilizada en diferentes partes de la aplicació
 
 > la parte más importante en una base de datos es su conceptualización y su modelo, para evitar el retrabajo.
 
-## Llaves.
+### Llaves.
 
 Hace único a un registro de información. 
 Tenemos 2 tipos:
 
-### Llaves Primarias (PK)
+#### Llaves Primarias (PK)
 
 Identifica un registro como único dentro de la entidad a la que pertenece. en el listado de atributos vamos a poner las siglas **PK** de **Primary Key** delante del atributo que sea llave principal. 
 
@@ -166,25 +168,25 @@ Identifica un registro como único dentro de la entidad a la que pertenece. en e
 * ci (ya que es un número único para cada paersona)
 * Registro Universitaro.
 
-### Llaves Foraneas
+#### Llaves Foraneas
 
 Relaciona los datos de un registro de una entidad con las de otra, o con un registro distinto de la misma entidad. En nuestro listado de atributos pondremos las siglas **FK** de **Foreign Key** delante del atributo que sea llave foránea.
 
 > EJEMPLO: hablando de los roles que podriamos tener en ese sistema de gestion escolar podria yo tener estudiantes, profesores y personal administrativo, entonces estos perfiles van a tener una llave, en la entidad que almacena las personas en lugar de ver el nombre de: _estudiantes, profesores y personal administrativo_ vamos a ver el Id(identificador) al que hace referencia,
 
-### Atributos únicos.
+#### Atributos únicos.
 
 En algunas ocaciones vamos a necesitar atributos únicos que no haya datos duplicados en la entidad, pero no son necesariamente una llave primaria o foranea.
 
 > **Ejemplo** para que un usuario no pueda crear 2 cuentas diferentes con un mismo **correo o número de teléfono**(muy comun cuando queremos darnos de alta en las redes sociales). Otro ejemplo seria el alias o el nombre de usuario que utilizas, los números de las placas de los vehiculos, nuestra CI, etc. Podrian ser consideradas Atributo único
 
-## Relaciones
+### Relaciones
 
 Las relaciones son las asociaciones que hacemos entre las entidades para poder recuperar y vincular los datos.
 
 Para crear una relación semántica utilizamos un **verbo** para relaciónar las entidades en cuestión.
 
-### Tipos de relaciones:
+#### Tipos de relaciones:
 
 * **1 a 1** cada Automobil tiene una única placa y cada placa pertenece a un único automobil.
 * **1 a M** una escuela puede tener muchos estudiantes, pero cada estudiante solo puede estar inscrito en una escuela específica.
@@ -193,7 +195,7 @@ Para crear una relación semántica utilizamos un **verbo** para relaciónar las
 
 >> no es muy comun(puede significar que lo tengas que volver a normalizar o usar el no relacional) pero lo puedes encontrar en estos casos, por ejemplo, en sistemas de gestión educativa, bibliotecas, o redes sociales.
 
-## Modelo Entidad relación.
+### Modelo Entidad relación.
 
 
 - **Modelo entidad-relación (MER)**: Se refiere al concepto teórico y abstracto que describe cómo las entidades (objetos o conceptos) y sus relaciones se estructuran en un sistema de base de datos. Es una representación conceptual que define las reglas y restricciones de los datos.
@@ -226,7 +228,7 @@ Este tipo de diagramas lo puedes hacer con cualquier aplicación o software de d
 
 seria bueno tener información precargada de los catálogos.
 
-## Normalización de BD's
+### Normalización de BD's
 
 La normalización de bases de datos es un proceso que se utiliza para organizar y optimizar la estructura de una base de datos para asegurar su integridad, evitar la redundancia y mejorar el rendimiento. La normalización consiste en la división de las entidades en varias entidades más pequeñas y relacionarlas mediante llaves foráneas.
 
@@ -238,7 +240,7 @@ Es importante tener en cuenta que la normalización puede tener un impacto en el
 
 > tener muchas tablas pero tablas pequeñitas, si tu tienes una entidad muy grande es más complejo hacer operaciones sobre ellas.
 
-### Formas normales
+#### Formas normales
 
 Las formas normales son estándares para la organización y modelamiento de datos en una base de datos relacional. En total existen 5 formas normales.
 
@@ -281,7 +283,7 @@ segun Copilot
 
 Estas formas ayudan a organizar los datos de manera eficiente, reduciendo la redundancia y mejorando la integridad de la base de datos.
 
-## Normalizando un modelo parte I
+### Normalizando un modelo parte I
 
 Ejemplo de normalización de base de datos:
 
@@ -355,7 +357,7 @@ Por lo que el modelo quedaría de la siguiente forma:
 | 3        | 3       |z.Satélite | Calle 3 | No.567 | Tarija   | Bolivia |
 | 4        | 1       |z.Bautista | Calle 4 | No.678 | La Paz   | Bolivia |
 
-## Normalizando un modelo parte II
+### Normalizando un modelo parte II
 
 **La tercer forma normal** exige que no haya transparencias funcionales. Esto se logra removiendo todas las dependencias transitivas, es decir, aquellas dependencias en las que un atributo depende indirectamente de otro a través de un tercer atributo.
 
@@ -441,7 +443,7 @@ Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que 
 
 ![alt text](image-4.png)
 
-## Modelo de datos desde 0
+### Modelo de datos desde 0
 
 **PASOS A SEGUIR:**
 
@@ -458,7 +460,7 @@ Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que 
 1. Identificar los atributos que puedan ser únicos en el sistema.
 1. Identificar las reglas de negocio (Operaciones _CRUD_) del sistema.
 
-## Glosario
+### Glosario
 
 - **PK**: _Primary Key_
 - **FK**: _Foreign Key_
@@ -471,11 +473,11 @@ Cuando sigas estos pasos de _modelado de datos_ al pie de la letra, vas a evitar
 
 >la normalizacion se aplica en un modelo existente.
 
-### Ejemplo I Modelado de Datos: Entidades y atributos
+#### Ejemplo I Modelado de Datos: Entidades y atributos
 
 te suguiero que hagas un modelado de datos de algo pequeño ejemplo: HOBIES si coleccionas juguetes, libros, revistas, base de datos para personajes de series. Que te hagas tu propio inventario. Te va a ayudar bastante.
 
-### Ejemplo I Modelado de Datos: Modelo E-R
+#### Ejemplo I Modelado de Datos: Modelo E-R
 
 para el modelado vamos a usar una aplicación web llamada:
 
@@ -488,7 +490,7 @@ Sirve para hacer diagramas incluso para redes
 "Suelo saltarme el diagrama _entidad-relación_ por que es más util el modelo relacional"
 
 
-### Ejemplo I Modelado de Datos: Modelo relacional de la DB
+#### Ejemplo I Modelado de Datos: Modelo relacional de la DB
 
 
 > En la base de datos podemos almacenar archivos binarios(multimedia) pero no es idal por que a la hora de consultarlo eso me va demandar mucho procesamiento de cómputo a la computadora donde esté la base de datos.
@@ -498,7 +500,7 @@ Sirve para hacer diagramas incluso para redes
 
 ![diagrama-terminado](Diagrama-e-r-taller-foto.png)
 
-### Ejemplo I Modelado de Datos: Regla de negocio y conclusiones.
+#### Ejemplo I Modelado de Datos: Regla de negocio y conclusiones.
 
 las reglas de negocio se van dando conforme tú vas creando las entidades.
 
@@ -510,7 +512,7 @@ Ya cuando tienes las reglas de negocio escritas gramaticalmente, las pasas a có
 
 Antes de pasarte a código SQL o al código NoSQL es que vayas haciendo una hoja de cálculo -por entidad- y vayas incertando datos ya reales de manera que vayas haciendo una corrida de datos "sirve sobre todo en base de datos relacionales" 
 
-### Ejemplo Modelado de datos: Corrida de Datos
+#### Ejemplo Modelado de datos: Corrida de Datos
 
 ¿Qué es una corrida de datos?
 
@@ -570,12 +572,35 @@ pues en sistemas(modelos) de transaciones donde debe hacer cálculos artimético
 
 > ajusta ambas tablas para  asegurarnos que sean coherentes con la descripción de las órdenes. (analiza cada una) si yo encontre una incoherencia en solo una orden imagino que talvez hay más incoherencias.
 
-### Ejemplo Modelado de Datos: Modelo Documental
+#### Ejemplo Modelado de Datos: Modelo Documental
 
-min 4:40
+Si decidimos utilizar un gestor de datos **relacional** entonces las entidades se combierten en tablas.
 
-generar para la parte de "vehiculos"
+Si decidimos utilizar un gestor de datos **no relacional** entonces las entidades son los objetos de nuestro modelo de datos.
 
+Hay un tipo de base de datos no relacional que son las documentales y se llaman documentales por que las tablas se convierten en documentos y un documento es como si fuera un objeto Json(se utiliza como tecnologia de cambio de información entre todo los lenguajes de programación).
 
+Yo en mi articulo de _maratones_ tengo un archivo JSON que es como mi base de datos no relacional y desde ahi via Ajax lo cargo a la interfaz.
 
+> jon: "no teman a cargar su html dinamicamente con tecnologias como ajax para pintar sus interfaces, ajax es SEO Frenly"
+
+![alt text](image-6.png)
+
+¿Qué es SEO friendly?
+
+_El contenido SEO friendly es un contenido escrito que ayuda a los motores de búsqueda a comprender de qué se trata un tema en específico, a qué consultas de los usuarios responde y qué aprenderán las personas al consumir el texto._
+
+Sí, ustedes van a desarrollar algun sitio que va ser un poco más informativo en lugar de estar escribiendo manualmente código html en las seccíones cuando algo sea muy repetitivo puedes usar el modelo de javaScript no relacional. (Creo que no es necesario ya que todo lo puedes hacer en Markdown) 
+
+Si la base de datos que vas a tocar ya está hecha y la tienes que mejorar, entonces tienes que hacer la tecnica de normalización.
+
+Si vas a usar catálogos previamente cargados entonces usa tecnologia SQL.
+
+Recuerda que los modelos No relacionales sacrificamos integridad de datos por performans.
+
+Hay bases de datos como _fIREBASE_ Y _MONGODB_ que si tu le subes un archivo Json en automático como es un formato documental te lo detecta y te lo implementa como un documento dentro de su base de datos.
+
+intenta hacer un ejercicio basado en el _hobbie_ que tengas por que es algo que te apaciona, es algo que ya conoces y sabes como funciona la logica de negocio (el como debe almacenarse los datos que quieres modelar)
+
+## MODELADO DE BASES DE DATOS
 

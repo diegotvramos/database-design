@@ -1,0 +1,65 @@
+
+{
+    "carreras": [
+        {
+            "carrera_id": "1",
+            "nombre": "carrera we run",
+            "tipo_carrera": "10k",
+            "fecha": "2011-11-26",
+            "tiempo": "56:59",
+            "mejor_tiempo": "false",
+            "altitud": "3250",
+            "lugar": "La Paz",
+            "pais": "Bolivia",
+            "foto": "img/carrera01.jpg"
+        },
+        {
+            "carrera_id": "2",
+            "nombre": "maratón de los Andes",
+            "tipo_carrera": "42k",
+            "fecha": "2013-07-19",
+            "tiempo": "4:12:34",
+            "mejor_tiempo": "true",
+            "altitud": "3600",
+            "lugar": "Cusco",
+            "pais": "Perú",
+            "foto": "img/carrera02.jpg"
+        },
+        {
+            "carrera_id": "3",
+            "nombre": "carrera de la paz",
+            "tipo_carrera": "5k",
+            "fecha": "2015-09-25",
+            "tiempo": "27:45",
+            "mejor_tiempo": "false",
+            "altitud": "3640",
+            "lugar": "La Paz",
+            "pais": "Bolivia",
+            "foto": "img/carrera03.jpg"
+        },
+        {
+            "carrera_id": "4",
+            "nombre": "carrera del sol",
+            "tipo_carrera": "21k",
+            "fecha": "2018-04-10",
+            "tiempo": "1:58:22",
+            "mejor_tiempo": "false",
+            "altitud": "2500",
+            "lugar": "Quito",
+            "pais": "Ecuador",
+            "foto": "img/carrera04.jpg"
+        },
+        {
+            "carrera_id": "5",
+            "nombre": "carrera de la montaña",
+            "tipo_carrera": "10k",
+            "fecha": "2020-06-15",
+            "tiempo": "53:10",
+            "mejor_tiempo": "false",
+            "altitud": "2800",
+            "lugar": "Medellín",
+            "pais": "Colombia",
+            "foto": "img/carrera05.jpg"
+        }
+    ]
+}

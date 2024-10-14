@@ -98,6 +98,18 @@
 
 * Repuestos puede pertenecer a muchas Órdenes de Trabajo.
 
+### Ordenes_servicios
+
+- orden_servicio_id
+- orden_id **(FK)** 
+- servicio_id **(FK)**
+
+### Ordenes_productos
+
+- orden_producto_id
+- orden_id
+- producto_id
+- cantidad_utilizado
 
 ### MECÁNICOS
 
