@@ -548,6 +548,28 @@ pues en sistemas(modelos) de transaciones donde debe hacer cálculos artimético
 
 > Recuerda que tambien el id del conductor y el id del vehiculo deben ser coherentes respectivamente.
 
+
+
+> generame 15 ordenes de trabajo para un taller mecánico con los siguientes datos respectivamente: orden_id,	fecha_entrada,	fecha_salida,	requerimiento,	descripcion,	estado,	conductor_id,	vehiculo_id,	mecanico_id. donde "estado" hay estas opciones: Pendiente, en proceso, finalizado, entregado, cancelado; donde "requerimiento" hay 3 opciones: Reparación o Mantenimiento o Ambos, donde "fecha_salida" hay que dar solo un estimado de la reparación. toma en cuenta que "conductor_id,	vehiculo_id,	mecanico_id" son las llaves foraneas, recueda asignar los trabajos a los mecánicos segun requerimiento de la orden. solo ponle el id_mecanico correspondiente. Recuerda que tambien el id del conductor y el id del vehiculo deben ser coherentes respectivamente. tambien recuerda que solo hay 10 vehiculos registrados, eso quiere decir que algunos vehiculos vinieron más de una vez al taller. Toma en cuenta las tablas que generaste: VEHICULOS, CONDUCTORES Y MECÁNICOS. por favor hazlo en una tabla en lenguaje markdown
+
+> todo bien pero recuerda que en la tabla "conductores "  hay conductores que tienen más de un vehiculo. solo haz que los "id" sean coherentes con ese dato
+
+> una "orden" puede tener  muchos servicios, y un servicio puede ser usada por  múchas ordenes. es una relacion de muchos a muchos, entonces estoy creando una tabla intermedia llamada "Ordenes_servicios" con los siguientes datos: orden_id (pk, fk que viene de la tabla "ordenes" ) y "servicios_id"(es un fk que viene de la tabla "servicios"), generame 10 registos, pero haz que los id's sean coherentes con  el "requerimiento" y la "descripción" de la tabla "ordenes". te ruego que lo hagas en una tabla en lenguaje Markdown
+
+> es más, genrame para las 15 ordenes, entiendo que vas a generar más por que   un vehiculo puede requerir más de un servicio, estoy en lo correcto? haz que sea coherente como lo haz venido hacieno.
+
+> Vamos a ajustar la lista de la tabla "SERVICIOS" para que sea más completa y útil en un taller mecánico, si es posible elimina o aumenta servicios.
+
+> puedes ajustar mi tabla "Ordenes_servicios" para que sea más completa? ¿o no es necesario?
+
+> que dice la descripcion en el id 15 de mi tabla "ordenes"?
+
+> y que servicio(s) y repuesto(s)/producto(s) va utilizar?
+
+> ahora en mi tabla "ordenes_servicios" y "ordenes_productos" me dicen otra cosa.
+
+> ajusta ambas tablas para  asegurarnos que sean coherentes con la descripción de las órdenes. (analiza cada una) si yo encontre una incoherencia en solo una orden imagino que talvez hay más incoherencias.
+
 ### Ejemplo Modelado de Datos: Modelo Documental
 
 min 4:40
