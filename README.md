@@ -604,3 +604,11 @@ intenta hacer un ejercicio basado en el _hobbie_ que tengas por que es algo que 
 
 ## MODELADO DE BASES DE DATOS
 
+El primer ejercicio se va tratar de un sistema de ventas. Para lo cual vamos a seguir los 12 pasos que nos recomendó Jon. hagamos los primeros 6 de una vez.
+
+### Primer Modelado: Sistema de ventas
+
+¿POR QUE USAMOS MARKDOWN? por que se esta convirtiendo en un estandar para documentar.
+
+Yo directamente salto al **modelo relacional de la base de datos**
+
