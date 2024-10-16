@@ -612,3 +612,5 @@ El primer ejercicio se va tratar de un sistema de ventas. Para lo cual vamos a s
 
 Yo directamente salto al **modelo relacional de la base de datos**
 
+min 48
+
