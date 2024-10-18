@@ -612,5 +612,17 @@ El primer ejercicio se va tratar de un sistema de ventas. Para lo cual vamos a s
 
 Yo directamente salto al **modelo relacional de la base de datos**
 
-min 48
+> en la tabla "Ventas" trata de el monto total que un cliente pagó por uno o varios productos respetando la fecha. Y en "Detalle_ventas" está todo los precios de los productos unitarios que compró el cliente, entonces vuelve a generar esas dos tablas pero de una manera más coherente. mas depues te voy a pedir que vuelvas a interpretar un registro al azar.
+
+La corida de datos te ayuda a vislumbrar 
+
+Tienes que entender: "cada cosa es a su propósito"
+
+asi que la corrida de datos en una base de datos documental **No tiene sentido**
+
+Hay que entender de que es lo que vamos a vender. Dependiendo de las necesidades de tus ventas pues haces tus **reglas de negocio**
+
+### Segundo Modelado: Sistema de encuestas
+
+1:00
 
