@@ -624,5 +624,19 @@ Hay que entender de que es lo que vamos a vender. Dependiendo de las necesidades
 
 ### Segundo Modelado: Sistema de encuestas
 
+* **Definición de Entidades y Atributos**
+
+* **Definición de relaciones**
+
+* **Diagrama Modelo Relacional de la BD**
+ 
+Una vista en base de datos es un reporte.
+
+si nos piden _porcentaje de efectividad_, eso se calcula en esa vista que creaste.
+
+Es por eso que no necesito agregarle a la tabla como un atributo adicional a la tabla de resutaldos
+
+
+
 1:00
 
