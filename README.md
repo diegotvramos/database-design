@@ -637,6 +637,15 @@ si nos piden _porcentaje de efectividad_, eso se calcula en esa vista que creast
 Es por eso que no necesito agregarle a la tabla como un atributo adicional a la tabla de resutaldos
 
 
+### Tercer Modelado: Sistema de Autenticación
 
-1:00
+vamos a tener relaciones de muchos a muchos, para ello vamos a usar tablas _Pivote_
+
+> En un sistema de autenticación, la relación de muchos a muchos entre roles y permisos se da porque un rol puede tener múltiples permisos asociados, y un permiso puede ser asignado a múltiples roles. Por ejemplo, el rol de "Administrador" puede tener permisos para "Crear Usuario", "Eliminar Usuario" y "Ver Reportes". Al mismo tiempo, el permiso de "Crear Usuario" puede estar asignado tanto al rol de "Administrador" como al rol de "Gerente".
+
+Para gestionar esta relación, se usa una tabla intermedia, RolesPermisos, que vincula cada rol con sus permisos correspondientes. Esto permite una gestión flexible y escalable de las autorizaciones en el sistema.
+
+Yo no me ariesgaria a hacer la parte de autenticacion como un modelo no relacional. Por que las relaciones nos ayudan a identificar que tipo de roles tiene un usuario y cada rol que tipo de permisos le podemos conceder.
+
+### Cuarto Modelado: MirChaGram.
 
