@@ -647,5 +647,37 @@ Para gestionar esta relación, se usa una tabla intermedia, RolesPermisos, que v
 
 Yo no me ariesgaria a hacer la parte de autenticacion como un modelo no relacional. Por que las relaciones nos ayudan a identificar que tipo de roles tiene un usuario y cada rol que tipo de permisos le podemos conceder.
 
-### Cuarto Modelado: MirChaGram.
+### Cuarto Modelado: baltaGram.
+
+Voy a utilizar como referencia el principio de una red social muy popular que es instagram, Instagram.
+
+ENUM -> Es util para evitar crear un catálogo adicional cuado tu catálogo no vaya a ecceder de 5 opciones y que en un futuro no vayan a cambiar.
+
+**Reglas de negocio**
+
+Una regla de las bases de datos es que una llave primaria no se pude modificar.
+
+> Recuerden el proceso de la normalizacion de la base de datos hay que encontrar un equilibrio entre la integridad  de los datos quizá este modelo pueda funcionar de una mejor forma si hacemos un modelo no relacional.
+
+> Para la autenticacion de usuario esa seguiremos usando un modelo relacionalo.
+
+trata de hacer una propuesta No relacional
+
+**Modelo Documental**
+
+2:30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
