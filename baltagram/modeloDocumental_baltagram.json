@@ -1,0 +1,76 @@
+{
+    
+
+    "users" : [
+        {
+            "user_id": "",
+            "user": "",
+            "user_date": "",
+            "user_name": "",
+            "email": "",
+            "password": "",
+            "phone": "",
+            "bio": "",
+            "web": "",
+            "avatar": "",
+            "birthdate": "",
+            "genre": "",
+            "conuntry": "",
+            "posts": [1, 2, 3],
+            "following": ["@user1", "@user2", "@user3"],
+            "followers": ["@user1", "@user2", "@user3"]
+        },
+        {
+            "user_id": "",
+            "user": "",
+            "user_date": "",
+            "user_name": "",
+            "email": "",
+            "password": "",
+            "phone": "",
+            "bio": "",
+            "web": "",
+            "avatar": "",
+            "birthdate": "",
+            "genre": "",
+            "conuntry": "" 
+        }
+    ],
+
+    "posts": [
+        {
+            "post_id": "",
+            "post_date": "",
+            "plot": "",
+            "photo": "",
+            "users" : "",
+            "comments" : [
+                {
+                    "commet_id": "",
+                    "comment_date" : "",
+                    "comment" : "",
+                    "user" : ""
+                },
+                {
+                    "commet_id": "",
+                    "comment_date" : "",
+                    "comment" : "",
+                    "user" : ""
+                },
+                {
+                    "commet_id": "",
+                    "comment_date" : "",
+                    "comment" : "",
+                    "user" : ""
+                },
+                {
+                    "commet_id": "",
+                    "comment_date" : "",
+                    "comment" : "",
+                    "user" : ""
+                }
+            ],
+            "hearts" : ["@user1", "@user2", "@user3"]
+        }
+    ]
+}

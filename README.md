@@ -665,10 +665,21 @@ trata de hacer una propuesta No relacional
 
 **Modelo Documental**
 
-2:30
+Hay dos tipos de _estructuras_ en el modelo documental:
+
+1. **Documentos separados** (normalización)
+1. **Documentos combinados** (desnormalización) puede ser organizado en secciones distintas.
+
+"Yo no se porqué muchos _bootscams_ enseñan MongoDB de forma relacional donde tratan de replicar las relaciones que se harian en un gestor de base de datos como Postgres, o MySQL"
+
+> Un error comun es tratar de modelar un modelo no relacional y seguir haciendo relaciones, si se puede pero no es lo optimo y no siempre se necesita.
 
 
+### Quinto Modelado: Películas y Series
 
+Este ejemplo es muy frecuente para mostrar información de películas y series
+
+2 : 40
 
 
 

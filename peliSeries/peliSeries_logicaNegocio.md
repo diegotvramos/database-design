@@ -1,0 +1,16 @@
+
+
+
+# PeliSeries
+
+## Listado de Entidades
+
+
+
+
+
+
+
+
+
+

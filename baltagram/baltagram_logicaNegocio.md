@@ -148,3 +148,8 @@ Un **usuario** puede ser seguido por multiples **usuarios** (_1 a M_).
 1. Leer un contry en particular.
 1. Actualizar un contry.
 1. Eliminar un contry.
+
+
+
+## MODELO DOCUMENTAL
+
