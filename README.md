@@ -686,7 +686,16 @@ En esta página podemos observar que las películas si tienen distintos generos
 El campo "estudio" y el campo "director" puede ser tranquilamente una relación de muchos a muchos.
 
 
-2 : 40
+**Modelo relacional de la base de datos**
+
+
+> Recuerda: para mantener un orden de las tablas y las relaciones al momento de diseñar en cualquiers software, recuerda ordenarlos en columnas para que las relaciones no sean en forma diagonal.
+
+**Modelo documenta**
+
+Dependiendo de las necesidades reales que tenga tu proyecto un modelo no relacional te puede simplificar muchisimo.
+
+### Sexto Modelado: Saint Seiya
 
 
 
