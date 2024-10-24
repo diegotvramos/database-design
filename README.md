@@ -679,6 +679,13 @@ Hay dos tipos de _estructuras_ en el modelo documental:
 
 Este ejemplo es muy frecuente para mostrar información de películas y series
 
+Hay una página web que hace un ranking de toda las películas del mundo: y se llama: [**imdb**](https://www.imdb.com/)
+
+En esta página podemos observar que las películas si tienen distintos generos
+
+El campo "estudio" y el campo "director" puede ser tranquilamente una relación de muchos a muchos.
+
+
 2 : 40
 
 
