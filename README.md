@@ -697,6 +697,9 @@ Dependiendo de las necesidades reales que tenga tu proyecto un modelo no relacio
 
 ### Sexto Modelado: Saint Seiya
 
+Listado de entidades
+
+3:46
 
 
 
