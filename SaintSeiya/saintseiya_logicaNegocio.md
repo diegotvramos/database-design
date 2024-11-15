@@ -8,7 +8,7 @@
 
 - personaje_id **(PK)**
 - nombre
-- armadura **(FK)**
+<!-- - armadura **(FK)** -->
 - signo_id **(FK)**
 - nacimiento
 - pais **(FK)**
@@ -23,6 +23,7 @@
 
 - armadura_id **(PK)**
 - armadura
+- personaje_id **(FK)**
 - armadura_tipo **(FK)**
 
 ### armaduras_tipos **(EC)**
@@ -94,11 +95,13 @@
 
 ## Relaciones
 
-1. Un **personaje** tiene una **armadura** (_1 a 1_)
-1. Un **personaje** tiene un **signo** (_1 a 1_)
-1. Un **personaje** pertenece a un **país** (_1 a 1_)
+1. Un **personaje** tiene muchas armaduras (_1 a M_) 
+1. Un **signo** puede pertenecer a muchos **personajes** (_1 a M_)
+1. Un **pais** pertenece a muchos **personajes** (_1 a 1_)
 1. Un **personaje** **entrenó** en un pais (_1 a M_)
+1. Una **"Armadura"** tiene muchas versiones (1 a M)
 1. Un **personaje** puede ser un **maestro** (_1 a 1_)
+1. Un ejercito posee 
 1. Un **personaje** pertenece a un **ejercito**, y un ejercito hay muchos personajes (_1 a M_)
 1. Un **personaje** tiene un **rango** (_1 a M_)
 1. 
