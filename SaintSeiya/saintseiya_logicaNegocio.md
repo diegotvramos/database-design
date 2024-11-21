@@ -95,21 +95,24 @@
 
 ## Relaciones
 
-1. Un **personaje** tiene muchas armaduras (_1 a M_) 
-1. Un **signo** puede pertenecer a muchos **personajes** (_1 a M_)
-1. Un **pais** pertenece a muchos **personajes** (_1 a 1_)
-1. Un **personaje** **entrenó** en un pais (_1 a M_)
-1. Una **"Armadura"** tiene muchas versiones (1 a M)
-1. Un **personaje** puede ser un **maestro** (_1 a 1_)
-1. Un ejercito posee 
-1. Un **personaje** pertenece a un **ejercito**, y un ejercito hay muchos personajes (_1 a M_)
-1. Un **personaje** tiene un **rango** (_1 a M_)
-1. 
-1. 
-1. 
-1. 
-1. 
+1. Un **personaje** tiene muchas armaduras (_1 a M_). 
+1. **armadura** tiene un **tipo de armadura** (_M a 1_).
+1. Una **"Armadura"** tiene muchas **versiones** (1 a M).
+1. Un **signo** pertenece a muchos **personajes** (_1 a M_).
+1. Un **pais** pertenece a muchos **personajes** (_1 a M_).
+1. Un **personaje** entrenó en un **pais** (_1 a M_)
+1. Un **personaje** tiene muchos **maestros** (_1 a M_)
+1. **ejercito** tiene muchos **personajes** (_1 a M_).
+1. **rango** pertenece a muchos **personajes**(_1 a M_).
+1. Un **personaje** tiene muchas **técnicas** y **técnica** puede ser usada por muchos **personajes** (_M a M_). [usamos una tabla pivote]
+1. **personaje** tiene muchas **franquicias** y **franquicias** tiene muchos **personajes** (_M a M_).
+1. **personajes** pertenece a **medios** y **medios** pertenece a muchos **personajes** (_M a M_).
 
+## Diagrama Modelo Relacional de la BD
+
+![modelo-relacional](saintSeiya-modelo-relacional.drawio.png)
+
+## Reglas de Negocio
 
 
 
