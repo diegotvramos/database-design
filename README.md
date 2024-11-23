@@ -699,10 +699,11 @@ Dependiendo de las necesidades reales que tenga tu proyecto un modelo no relacio
 
 Listado de entidades
 
-3:46
+> Recuerda que las entendiades "Pivote" no se actualizan en las **reglas de negocio** por que solo se registran PK'S de otras entidades.
 
+vamos a hacer ahora si el modelo documental.
 
-
+4:00 
 
 
 

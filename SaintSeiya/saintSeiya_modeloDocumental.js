@@ -1,0 +1,4 @@
+{
+    "personajes": [],
+    "armaduras": []
+}

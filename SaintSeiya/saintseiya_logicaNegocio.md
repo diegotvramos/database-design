@@ -114,11 +114,119 @@
 
 ## Reglas de Negocio
 
+### Personajes
+
+1. Crear un personaje.
+1. Leer todo los personajes.
+1. Leer un personaje en particular.
+1. Actualizar un personaje.
+1. Eliminar un personaje.
+
+### Armaduras
+
+
+1. Crear una armadura.
+1. Leer todas las armaduras.
+1. Leer una armadura en particular.
+1. Actualizar una armadura.
+1. Eliminar una armadura.
+
+### Armadura_Tipos
+
+1. Crear un tipo de armadura.
+1. Leer todo los tipos de armadura.
+1. Leer un tipo de armadura en particular.
+1. Actualizar un tipo de armadura.
+1. Eliminar un tipo de armadura.
+
+### Armadura_Versiones
+
+1. Crear una version de armadura.
+1. Leer todas las verciones de armadura.
+1. Leer una version de armadura en particular.
+1. Actualizar una armadura_version.
+1. eliminar una version de armadura.
+
+### Signos
+
+
+1. Crear un signo.
+1. Leer todo los signos.
+1. Leer un signo en particular.
+1. Actualizar un signo.
+1. Eliminar un signo.
+
+
+### Paises
+
+1. Crear un pais.
+1. Leer todo los paises.
+1. Leer un  pais en particular.
+1. Actualizar un pais.
+1. Eliminar un pais.
 
 
 
+### Ejercitos
 
 
+1. Crear un ejercito.
+1. Leer todo los ejercitos.
+1. Leer un ejercito en particular.
+1. Actualizar un ejercito.
+1. Eliminar un ejercito.
+
+
+### Rangos
+
+1. Crear un rango.
+1. Leer todo los rangos.
+1. Leer un rango en particular.
+1. Actualizar un rango.
+1. Eliminar un rango.
+
+### Tecnicas
+
+1. Crear una tecnica.
+1. Leer toda las tecnicas.
+1. Leer una tecnica en particular.
+1. Actualizar una tecnica.
+1. Eliminar una tecnica.
+ 
+### tecnicas_x_personajes (es una entidad pivote, no tiene sentido actualizarlas) 
+
+1. Crear tecnicas_x_personajes.
+1. Leer todas las tecnicas_x_personajes .
+1. eliminar una tecnicas_x_personajes.
+
+### Franquicias
+
+1. Crear una franquicia.
+1. Leer toda las franquicias.
+1. Leer una franquicia en particular.
+1. Actualizar una franquicia.
+1. Eliminar una franquicia.
+ 
+### franquicias_x_personajes
+
+1. Crear franquicias_x_personajes.
+1. Leer toda las franquicias_x_personajes.
+1. eliminar una franquicias_x_personajes.
+
+### medios
+
+1. Crear medios.
+1. Leer todo los medios.
+1. Leer un medio en particular.
+1. Actualizar un Medio.
+1. Eliminar una medio.
+
+
+### medios_x_personajes
+
+1. Crear medios_x_personajes.
+1. Leer todo los medios_x_personajes.
+1. eliminar un medios_x_personajes.
 
 
 
