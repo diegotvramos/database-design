@@ -703,7 +703,76 @@ Listado de entidades
 
 vamos a hacer ahora si el modelo documental.
 
-4:00 
+> Hay dos entidades que se pueden volver documentos que son: los "personajes" y las "armaduras"
+
+```json
+{
+    "personajes": [
+        {
+            "personaje_id" : "",
+            "nombre" : "",
+            "armadura" : ["armadura 1", "armadura 2"],
+            "signo" : "",
+            "nacimiento" : "",
+            "pais" : "",
+            "entrenamiento" : "",
+            "maestro" : ["maestro 1", "maestro 2"],
+            "ejercito" : ["ejercito 1", "ejercito 2"],
+            "rango" : ["oro", "plata", "bronse", "marinos"],
+            "foto" : ["foto 1", "foto 2"],
+            "canonico" : "",
+            // // Apartir de aquí estas entidades eran pivotes
+
+            "tecnica" : ["técnica 1", "técnica 2", "técnica 3"],
+            "franquicia" : ["franquicia 1", "franquicia 2", "franquicia 3"],
+            "medios" : ["medio 1", "medio 2", "medio 3"]
+        }
+    ],
+
+    "armaduras": [
+        {
+            "armadura_id" : "",
+            "armadura" : "",
+            "armadura_tipo" : "",
+            "armadura_versiones" : [
+                {
+                    "nombre" : "versión 1",
+                    "foto" : ["foto version 1", "foto version 2"]
+                },
+                {
+                    "nombre" : "versión 2",
+                    "foto" : "foto version 2"
+                },
+                {
+                    "nombre" : "versión 3",
+                    "foto" : "foto version 3"
+                }
+            ],
+            "portadores" : [
+                {"nombre" : "portador 1", "foto" : "foto portador 1"},
+                {"nombre" : "portador 2", "foto" : "foto portador 2"},
+                {"nombre" : "portador 3", "foto" : "foto portador 3"},
+                {"nombre" : "portador 4", "foto" : "foto portador 4"}
+            ]
+        }
+    ]
+}
+```
+
+Un proyecto lo podriamos hacer en cualquiera de las dos perspectivas, relacional o no relacional. 
+
+O puedes usar ambos con en el caso de "Baltagram"
+¿Qué es el desarrollo basado en microservicios?
+
+la base de datos lo podemos tener en la nuve de Amazon y la estructura del Front en jspy y adicionalmente vamos hacer el uso de los servicios de Firebase para la autenticación por que no simplifica la chamba y el backend lo vamos a tener en una _droplet_ de _DigitalOsean_
+
+A diferencia de antes donde en un servidor existia todo (seguridad, red, firewall, la base de datos, la aplicación a lado del servidor, la aplicación a lado del Frontend)
+
+Pues ahora cada una de esas partes puede estar en un microservicio incluso ahora ya existen los "micro-frontend"
+
+> No te ciegues o no te limites a que un proyecto forzosamente todo tenga que ser desarrollado en un modelo relacional o un modelo no relacional, todo depende de las necesidades y caracteristicas que tu vayas identificando podrias usar ambas y al final hacer una API que pueda interactuar con ambos modelos y mediante la programación backend unificarlo y exponerlo a la parte del front
+
+4:10
 
 
 
