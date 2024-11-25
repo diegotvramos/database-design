@@ -772,9 +772,23 @@ Pues ahora cada una de esas partes puede estar en un microservicio incluso ahora
 
 > No te ciegues o no te limites a que un proyecto forzosamente todo tenga que ser desarrollado en un modelo relacional o un modelo no relacional, todo depende de las necesidades y caracteristicas que tu vayas identificando podrias usar ambas y al final hacer una API que pueda interactuar con ambos modelos y mediante la programación backend unificarlo y exponerlo a la parte del front
 
-4:10
+### Último modelado: Entrena tu glamour
+
+¿Qué es un _store-prosedure_ ?
+es una funcion dentro de la base de datos 
+
+no lo normalizé ya que es un sistema que después ya no se va a utilizar.
+
+siempre debemos buscar un equilibrio.
+
+Trata de construir las reglas de negocio en base a los requisitos del sistema proporcionado.
+
+teneia que ser una base de datos relacional por que hay operaciones aritméticas que debemos hacer, y varias validaciónes
+
+ajemplo de funcinamiento 4:15 del video ![video-Youtube](https://youtu.be/aFgHVE_Y_YU?si=GsmbTSk-NiHQqrb8)
 
 
+> Es muy importante saber identificar si en un sistema combiene utilizar el **modelo relacional** o el **no relacional**
 
 
 

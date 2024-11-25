@@ -95,7 +95,7 @@
 
 ## Relaciones
 
-1. Un **personaje** tiene muchas armaduras (_1 a M_). 
+1. Un **personaje** tiene muchas **armaduras** (_1 a M_). 
 1. **armadura** tiene un **tipo de armadura** (_M a 1_).
 1. Una **"Armadura"** tiene muchas **versiones** (1 a M).
 1. Un **signo** pertenece a muchos **personajes** (_1 a M_).
