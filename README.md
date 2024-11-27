@@ -443,7 +443,7 @@ Las cosas se van a simplificar mucho cuando tu partas de un modelo de datos que 
 
 ![alt text](image-4.png)
 
-### Modelo de datos desde 0
+## Modelo de datos desde 0
 
 **PASOS A SEGUIR:**
 
