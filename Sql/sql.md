@@ -103,22 +103,22 @@ Si quieres un gestor de paquetes para Microsoft instala
 
 ## Tipos de datos
 
-| Tipo      | Descripción                                                                     |
-| --------- | ------------------------------------------------------------------------------- |
-| VARCHAR   | Cadena de texto variable, con una longitud máxima especificada.                 |
-| CHAR      | Cadena de texto fija, con una longitud específica.                              |
-| INT       | Número entero, positivo o negativo.                                             |
-| BIGINT    | Número entero grande, positivo o negativo.                                      |
-| FLOAT     | Número decimal de precisión simple.                                             |
-| DOUBLE    | Número decimal de doble precisión.                                              |
-| DECIMAL   | Número decimal con precisión fija.                                              |
-| DATE      | Fecha, con valores de año, mes y día.                                           |
-| TIME      | Hora, con valores de hora, minutos y segundos.                                  |
-| DATETIME  | Fecha y hora combinadas.                                                        |
-| TIMESTAMP | Marca de tiempo, que indica un momento específico en el tiempo.                 |
-| BOOLEAN   | Valor booleano, verdadero o falso.                                              |
-| BLOB      | Objeto binario grande, para almacenar datos binarios, como imágenes o archivos. |
-| JSON      | Formato de texto estructurado para el intercambio de datos.                     |
+| Tipo      | Descripción                                                                        |
+| --------- | -------------------------------------------------------------------------------    |
+| VARCHAR   | Cadena de texto variable, con una longitud máxima especificada.                    |
+| CHAR      | Cadena de texto fija, con una longitud específica.                                 |
+| INT       | Número entero, positivo o negativo.                                                |
+| BIGINT    | Número entero grande, positivo o negativo.                                         |
+| FLOAT     | Número decimal de precisión simple.                                                |
+| DOUBLE    | Número decimal de doble precisión.                                                 |
+| DECIMAL   | Número decimal con precisión fija.                                                 |
+| DATE      | Fecha, con valores de año, mes y día.                                              |
+| TIME      | Hora, con valores de hora, minutos y segundos.                                     |
+| DATETIME  | Fecha y hora combinadas.                                                           |
+| TIMESTAMP | Marca de tiempo, que indica un momento específico en el tiempo.(te permite sumar)  |
+| BOOLEAN   | Valor booleano, verdadero o falso.                                                 |
+| BLOB      | Objeto binario grande, para almacenar datos binarios, como imágenes o archivos.    |
+| JSON      | Formato de texto estructurado para el intercambio de datos.                        |
 
 
 > No es recomendable utilizar el tipo de dato "BLOB"
@@ -127,4 +127,62 @@ Si quieres un gestor de paquetes para Microsoft instala
 
 ## Tipos de Sentencias en SQL.
 
-00:36
+En SQL existen varios tipos de sentencias que se utilizan para realizar diferentes operaciones en una base de datos. Es un lenguaje imperativo(da ordenes)
+
+1. **Sentencias _DDL (Data Definition Language)_**: se utiliza para definir y modificar la estructura de la base de datos. Por ejemplo para crear o modificar la estructura de una tabla (_CREATE, ALTER, DROP, TRUNCATE_).
+1. **Sentencias _DML (Data Manipulation Language)_**: se tutilizan para manipular los datos dentro de una base de datos. Por ejemplo las instrucciones del CRUD(_INSERT, SELECT, UPDATE y DELETE_).
+1. **Sentencias _DCL (Data Control Language)_**: se utilizan para controlar el acceso a la base de datos y garantizar la seguridad. Por ejememplo para otorgar permisos a los usuarios para acceder a las bases de datos (_GRANT, REVOKE_).
+1. **Sentencias _TCL (Transaction Control Language)_**: se utilizan para controlar las transacciones de una base de datos (_COMMIT, ROLLBACK, SET TRANSACTION_).
+
+
+## Comandos y funciones básicas SQL
+
+Listando algulos de los comandos y funciones más utilizados en _SQL_
+
+### Comandos _SQL_
+
+| Comando  | Descripción                                                                                                                |
+| -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| SELECT   | Recupera datos de una o varias tablas. Es una de las sentencias más comunes en SQL.                                        |
+| INSERT   | Agrega nuevos datos a una tabla.                                                                                           |
+| UPDATE   | Actualiza los datos existentes en una tabla.                                                                               |
+| DELETE   | Elimina datos de una tabla.                                                                                                |
+| CREATE   | Crea una nueva tabla, vista, índice, procedimiento almacenado u otra estructura de base de datos.                          |
+| ALTER    | Modifica la estructura de una tabla existente, como agregar o eliminar columnas.                                           |
+| DROP     | Elimina una tabla, vista, índice, procedimiento almacenado u otra estructura de base de datos.                             |
+| GRANT    | Concede permisos a un usuario o grupo de usuarios para realizar operaciones en una tabla o en la base de datos en general. |
+| REVOKE   | Retira los permisos previamente otorgados a un usuario o grupo de usuarios.                                                |
+| JOIN     | Combina datos de dos o más tablas en función de una columna común.                                                         |
+| UNION    | Combina los resultados de dos o más consultas en una sola tabla.                                                           |
+| GROUP BY | Agrupa los resultados de una consulta en función de una o más columnas.                                                    |
+| HAVING   | Permite filtrar los resultados de una consulta agrupada.                                                                   |
+| ORDER BY | Ordena los resultados de una consulta en función de una o más columnas.                                                    |
+| LIMIT    | Limita el número de filas devueltas por una consulta.                                                                      |
+
+
+
+### Funciones _SQL_
+
+| Función     | Descripción                                                     |
+| ----------- | --------------------------------------------------------------- |
+| AVG()       | Devuelve el valor promedio de una columna numérica.             |
+| COUNT()     | Cuenta el número de filas o valores distintos en una columna.   |
+| MAX()       | Devuelve el valor máximo de una columna.                        |
+| MIN()       | Devuelve el valor mínimo de una columna.                        |
+| SUM()       | Devuelve la suma de los valores de una columna numérica.        |
+| CONCAT()    | Concatena dos o más cadenas de texto.                           |
+| SUBSTRING() | Devuelve una parte de una cadena de texto.                      |
+| UPPER()     | Convierte una cadena de texto a mayúsculas.                     |
+| LOWER()     | Convierte una cadena de texto a minúsculas.                     |
+| LEFT()      | Devuelve los caracteres iniciales de una cadena de texto.       |
+| RIGHT()     | Devuelve los caracteres finales de una cadena de texto.         |
+| DATE()      | Extrae la fecha de un valor de fecha y hora.                    |
+| YEAR()      | Devuelve el año de una fecha.                                   |
+| MONTH()     | Devuelve el mes de una fecha.                                   |
+| DAY()       | Devuelve el día de una fecha.                                   |
+| ROUND()     | Redondea un valor numérico al número de decimales especificado. |
+
+
+## Conectándonos a nuestro SGBD
+
+00:45
