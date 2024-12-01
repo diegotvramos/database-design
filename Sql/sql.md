@@ -185,4 +185,40 @@ Listando algulos de los comandos y funciones más utilizados en _SQL_
 
 ## Conectándonos a nuestro SGBD
 
-00:45
+Hay dos maneras de acceder a estos servidores de bases de datos.
+
+- A traves de tu terminal de comandos.
+ > Cuando tu instalas de manera local generalmente el usuario administrador es llamado: "root"
+
+- La segunda forma es DBeaver que nos permite conectarnos a los distintos tipos de servidor de bases de datos.
+
+> Recuerda, al instalar un servidor de base de datos te va a cargar por defecto una base de dato y sus usuarios, por favor no la vayas a eliminar por que esa base de datos la utiliza tu herramienta. Todo lo que no hayas creado y esté por default, "DEJALO"
+
+
+## Sintaxis SQL y Buenas Prácticas
+
+
+### Buenas prácticas.
+
+SQL, No distingue entre MAYÚSCULAS y mínusculas pero:
+
+* Comando y palabras reservadas de SQL van en MAYÚSCUAS.
+* Nombres de objetos y datos van en minúsculas con _snake_case_ (técnica del guion bajo).
+* Para strings usar comillas simples ( '' ).
+* Todas las sentencias terminan con un punto y coma ( ; )
+
+## Gestionando Bases de Datos
+
+```sql
+show databases;
+-- este comando sirve para mostrar toda las bases de datos.
+create database curso_sql;
+-- Este comando sirve para crear una base de datos.
+
+drop database curso_sql;
+-- Este comando sirve para eliminar una base de datos.
+```
+
+1:09
+
+
