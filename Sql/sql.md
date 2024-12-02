@@ -217,8 +217,63 @@ create database curso_sql;
 
 drop database curso_sql;
 -- Este comando sirve para eliminar una base de datos.
+
+
+create database if not exists curso_sql;
+
+drop database if exists curso_sql
+
+-- Podemos agregar condicionales para que estos erores no salga
+-- Estos condicionales no solo te sirven en la creación de base de datos
+-- sinó en todo tipo de objetos, bases de datos, store procedures, tablas, usuarios, vistas, etc.
+
+use alcaldia1;
+
+-- este comando sirve para usar una base de datos, esto te permitirá ejecutar distintas sentencias SQL.
+
+```
+## Usuarios y Privilegios
+
+Cuando tú contratas un servicio de hospedaje compartido que te dá el _FTP_, el _PHP_, _MYSQL_ no es que te dé acceso a todo su servidor de base de datos, te dá un usuario para que ese usuario cree las bases de datos que tu tienes permitida, por ejemplo si tu plan de hosting de da derecho a dos bases  pues solo vas a poder crear dos bases, entonces todo esto de los usuarios y los privilegios tambien los podemos gestionar con código
+
+Sí tu estas día a día desarrollando una aplicación dificilmente vas a crear usuarios y privilegios por que a tí seguramente ya te dieron un usuario con el que te conectas y lo que vas a hacer es trabajar con los datos que están dentro de la Base.
+
+Pero para las personas que son administradores del servidor donde se encuentra el servicio de base de datos ellos deben saber esta sintaxis.
+
+Lo que está antes de '@' es el nombre del usuario y despues está el nombre del servidor, ejemplo:
+
+> ``root@localhost``
+
+Pero si me conecto a un servidor en internet quizá en lugar de decir _localhost_ diria el nombre del dominio o IP del servidor.
+
+creamos un nuevo usuario:
+
+```sql
+    create user 'diegotv'@'localhost' identified by 'qwerty';
+
 ```
 
-1:09
+¿Cómo podria probar la coneccion con este usuario? copilot:
+
+pues creando una nueva coneccion con el nombre y la contraseña, o en la terminal:
+
+> _como escribir los comandos de una terminal (cmd) en marckdown? especifica **bash** o **shell**_
+
+```bash
+    mysql -u diegotv -p 
+```
+
+si ejecutas el comando 
+
+```sql
+show databases;
+```
+Observo que solo tengo una base de datos llamada "information_schema" que es una base de datos por defecto por que es con las que controla el esquema de la información del motor de MySQL y el rendimiento, no por que tú tengas un usuario en el servidor de base de datos significa que vas a tener acceso a toda la información de ese servidor
+
+> NOTA; por alguna razon para hacer una nueva coneccion a traves de la herramienta **DBeaver** primero debo abrir **Workbench** y conectarme con el usuario y la contraseña. Y despues recien me puedo conectar con la herramienta DBeaver.
+
+> El usuario ROOT tiene todo los privilegios.
+
+1:25
 
 
