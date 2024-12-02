@@ -229,7 +229,8 @@ drop database if exists curso_sql
 
 use alcaldia1;
 
--- este comando sirve para usar una base de datos, esto te permitirá ejecutar distintas sentencias SQL.
+-- indica al gestor de base de datos cual de las bases de datos disponibles es con la que vamos a trabajar.
+-- esto te permitirá ejecutar distintas sentencias SQL.
 
 ```
 ## Usuarios y Privilegios
@@ -250,6 +251,28 @@ creamos un nuevo usuario:
 
 ```sql
     create user 'diegotv'@'localhost' identified by 'qwerty';
+
+    grant all privileges on para_diego to 'diegotv'@'localhost' IDENTIFIED BY 'mi_password';
+-- con esto creamos privilegios para este usuario, pero antes debemos usar la base de datos al cual va poder aplicar estos privilegios
+
+
+flush privileges;
+
+-- Con esto se actualiza los privilegios, es una buena práctica en caso de que el servidor de base de datos 
+-- se encuentre en la nube
+
+show grants for 'diegotv'@'localhost';
+
+-- este comando sirve para mostrar los privilegios de un usuario en particular.
+
+revoke all, grant option from 'diegotv'@'localhost';
+-- Si tu quisieras revocar todo los permisos a un usuario.
+
+drop user 'diegotv'@'localhost';
+-- eliminando un usuario
+
+--contraseña en hash
+SELECT PASSWORD('mi_password');
 
 ```
 
@@ -274,6 +297,58 @@ Observo que solo tengo una base de datos llamada "information_schema" que es una
 
 > El usuario ROOT tiene todo los privilegios.
 
-1:25
+**Privilegios**
+
+si tu tienes un rol más de Backend que sí accede a la base de datos para generar tu lógica de aplicaciones, va ser muy dificil que tú te avoques a la administración de los permisos y los usuarios salvo que seas el administrador al mismo tiempo.
+
+## Gestionando tablas
+
+```sql
+SHOW TABLES;
+-- muestra las tablas de una base de datos
+
+DESCRIBE nombre_tabla;
+-- describe las caracteristicas de una tabla
+
+CREATE TABLE nombre_tabla(
+  campo1 TIPO_DATO ATRIBUTOS,
+  campo2 TIPO_DATO
+);
+
+ALTER TABLE nombre_tabla ADD COLUMN nombre_campo TIPO_DATO;
+-- agremamos una nueva columna.
+
+ALTER TABLE nombre_tabla MODIFY nombre_campo TIPO_DATO;
+-- modificando el tipo de dato  de algun atributo
+
+ALTER TABLE nombre_tabla RENAME COLUMN nombre_viejo TO nombre_nuevo;
+-- para renombrar la columna de una tabla
+
+ALTER TABLE nombre_tabla DROP COLUMN nombre_campo;
+-- Eliminando una columna
+
+DROP TABLE nombre_tabla;
+-- Para eliminar una tabla
+
+--Ejemplo de Tabla
+CREATE TABLE usuarios(
+	usuario_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(30) NOT NULL,
+	apellidos VARCHAR(30) NOT NULL,
+	correo VARCHAR(50) UNIQUE,
+	direccion VARCHAR(100) DEFAULT "Sin dirección",
+	edad INT DEFAULT 0
+);
+
+-- "unsigned" no va permitir la inserción de un valor negativo
+-- Al no especificarle "NOT NULL" ese campo se vuelve opcional, no pongas "NULL"
+-- "DEFAULT "sin dirección""En lugar de que aparesca un lugar vacio establecemos un valor por defecto
+
+
+```
+
+## CRUD DE Datos
+
+1:54
 
 
