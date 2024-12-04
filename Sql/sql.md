@@ -347,8 +347,121 @@ CREATE TABLE usuarios(
 
 ```
 
+Hay diferentes motores para crear una tabla, mayisam e inhoDB
+
 ## CRUD DE Datos
 
-1:54
+* Create - INSERT.
+* Read - SELECT.
+* Update - UPDATE.
+* Delete - DELETE
+
+### CREATE
+
+Para insertar un registro.
+
+```sql
+INSERT INTO tabla (nombre_campo_1, nombre_campo_2, ..., nombre_campo_n)
+  VALUES (valor_1, valor2, ..., valor_n);
+  -- Esta forma te dá mayor control de inserción de datos.
+-- Recuerda, no es necesario poner el ID por que es autoincremental.
+
+INSERT INTO tabla
+  SET campo_1 = 'valor_1', campo_2 = 'valor_2', ..., campo_n = valor_n;
+  -- es otra forma de insertár.
+
+```
+Insertar varios registros.
+
+
+```sql
+	INSERT INTO tabla (campo_1, campo_2, ..., campo_n) VALUES
+  (valor_1, valor2, ..., valor_n),
+  (valor_1, valor2, ..., valor_n),
+  ...,
+  (valor_1, valor2, ..., valor_n);
+```
+
+### READ
+
+Leer todos los campos de la tabla:
+
+```sql
+SELECT * FROM tabla;
+```
+
+Leer algunos campos de la tabla:
+
+```sql
+SELECT campo_1, campo_2, campo_n FROM tabla;
+```
+
+Saber cuantos registros tiene mi tabla:
+
+```sql
+SELECT COUNT(*) FROM tabla;
+```
+Poniendo alias
+
+```sql
+select count(*) as total_usuarios from usuarios;
+```
+
+Leer un registro en particular buscando el valor de un campo:
+
+```sql
+SELECT * FROM tabla WHERE campo_1 = 'valor_1';
+```
+
+Leer registros en particular buscando diferentes valores en un campo:
+
+```sql
+SELECT * FROM tabla WHERE campo_1 IN ('valor_1', 'valor_2', 'valor_n');
+```
+
+Leer un registro en particular buscando el valor similar en un campo con la **clausula LIKE**:
+
+```sql
+SELECT * FROM tabla WHERE campo_1 LIKE '%valor_1';
+SELECT * FROM tabla WHERE campo_1 LIKE 'valor_1%';
+SELECT * FROM tabla WHERE campo_1 LIKE '%valor_1%';
+-- usanso el operador lógico NOT
+select * from usuarios where correo not like '%gmail.com';
+-- dos usuarios no tienen correo y su valor es null por eso no muestra, es mejor no tener valores nulos.
+```
+
+Leer registro usando **operedores relacionales**:
+
+```sql
+
+select * from usuarios where edad != 29;
+-- donde la edad sea distinto de 29
+
+select * from usuarios where edad <> 29;
+-- otra forma del operador "distinto"
+
+select * from usuarios where edad >= 30;
+
+select * from usuarios where edad < 29;
+
+select * from usuarios where edad <= 29;
+```
+
+
+Leer un registro en particular buscando el valor con **operadores lógicos**:
+
+```sql
+SELECT * FROM tabla WHERE campo_1 = 'valor_1' AND campo_2 = 'valor_2';
+SELECT * FROM tabla WHERE campo_1 = 'valor_1' OR campo_2 = 'valor_2';
+SELECT * FROM tabla WHERE NOT campo_1 = 'valor_1';
+SELECT * FROM tabla WHERE campo_1 != 'valor_1';
+-- AND: significa que toda las condiciones se tienen que cumplir.
+
+```
+
+### UPDATE
+
+
+2:26
 
 
