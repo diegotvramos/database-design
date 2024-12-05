@@ -459,6 +459,23 @@ SELECT * FROM tabla WHERE campo_1 != 'valor_1';
 
 ```
 
+
+```sql
+-- BETWEEN
+select * from productos where precio >= 5000 and precio <= 15000;
+select * from productos where precio between 5000 and 15000;
+select fecha_ingreso from vehiculos where fecha_ingreso between '2024-01-01' and '2024-05-01';
+-- nos trae un conjunto de valores  en base a un rango. para fechas está genial  
+
+
+-- REGEXP 
+
+select * from productos where nombre regexp '[A-Z]';
+select * from productos where descripcion regexp '[0-9]';
+-- expreciones regulares
+-- EN SQL es mejor trabar con comillas simples
+```
+
 ### UPDATE
 
 Siempre agregar la clausula **_WHERE_** para evitar actualizar toda la tabla:
@@ -551,11 +568,256 @@ select max(precio) as precio_máximo  from productos;
 select min(precio) as precio_máximo  from productos;
 select sum(precio) * sum(cantidad) as ganancia_total from productos;
 select avg(precio) as precio_promedio from productos;
+select count(*) as productos_total from productos;
 ```
 
 ## SENTENCIAS DE AGRUPAMIENTO
 
 ### GROUP BY
 
+La cláusula _GROUP BY_ se utiliza para agrupar los registros en una consulta basándose en una o más columnas.
 
-2:58
+Supongamos que tenemos la siguiente tabla llamada "ventas":
+
+| id  | producto | cantidad | fecha      |
+| --- | -------- | -------- | ---------- |
+| 1   | Zapatos  | 5        | 2022-03-01 |
+| 2   | Camisas  | 3        | 2022-03-02 |
+| 3   | Zapatos  | 2        | 2022-03-03 |
+| 4   | Pantalón | 4        | 2022-03-03 |
+| 5   | Camisas  | 7        | 2022-03-04 |
+
+Podemos utilizar la cláusula _GROUP BY_ para obtener la cantidad total de cada producto vendido, agrupando por el nombre del producto.
+
+```sql
+SELECT producto, SUM(cantidad) AS total_vendido
+  FROM ventas
+  GROUP BY producto;
+```
+
+Esta consulta agrupa los registros de la tabla "_Ventas_" por la columna "producto" y calcula la suma total de la columna "cantidad" para cada producto. El resultado sería el siguiente:
+
+| producto | total_vendido |
+| -------- | ------------- |
+| Zapatos  | 7             |
+| Camisas  | 10            |
+| Pantalón | 4             |
+
+Como puedes ver, la cláusula _GROUP BY_ es muy útil para realizar operaciones de agregación, como contar, sumar o promediar valores, en diferentes grupos de registros.
+
+
+<!-- 
+Creamos la tabla vehiculos
+
+| vehiculo_id | matricula | clase/tipo | marca   | modelo | año  | transmision  | dirección     | sistema_combustión | color  | chasis/serial | combustible | aceite  | Fecha_creacion/fecha de ingreso |
+|-------------|-----------|------------|---------|--------|------|--------------|---------------|---------------------|--------|---------------|-------------|---------|-------------------------------|
+| 1           | ABC-123   | Sedan      | Toyota  | Corolla| 2015 | Automática   | Hidráulica    | Inyección           | Blanco | 1234567890    | Gasolina    | 10W-40  | 2024-01-15                   |
+| 2           | DEF-456   | Camioneta  | Nissan  | Frontier| 2018 | Mecánica     | Mecánica      | Turbo Inyección     | Negro  | 0987654321    | Diesel      | 15W-40  | 2024-02-20                   |
+| 3           | GHI-789   | Sedan      | Honda   | Civic  | 2017 | Automática   | No disponible | Carburado           | Azul   | 2345678901    | Gasolina    | 5W-30   | 2024-03-10                   |
+| 4           | JKL-012   | Camioneta  | Ford    | Ranger | 2020 | Mecánica     | Otro          | Inyección           | Rojo   | 3456789012    | Diesel      | 15W-40  | 2024-04-05                   |
+| 5           | MNO-345   | Sedan      | Chevrolet| Malibu| 2019 | Automática   | Hidráulica    | Turbo Carburado     | Verde  | 4567890123    | Gasolina    | 10W-30  | 2024-05-18                   |
+| 6           | PQR-678   | Camioneta  | Mitsubishi|L200  | 2016 | Mecánica     | Mecánica      | Inyección           | Gris   | 5678901234    | Diesel      | 15W-40  | 2024-06-25                   |
+| 7           | STU-901   | Sedan      | Hyundai | Elantra| 2021 | Automática   | Hidráulica    | Inyección           | Blanco | 6789012345    | Gasolina    | 10W-40  | 2024-07-12                   |
+ -->
+
+### HAVING
+
+La cláusula _HAVING_ se utiliza en _SQL_ para filtrar los resultados de una consulta que utiliza la cláusula _GROUP BY_. 
+
+Supongamos que tenemos una tabla llamada "_Ventas_" que contiene información sobre las ventas de una empresa:
+
+| id  | producto | cantidad | fecha      |
+| --- | -------- | -------- | ---------- |
+| 1   | A        | 10       | 2022-01-01 |
+| 2   | B        | 15       | 2022-01-02 |
+| 3   | C        | 20       | 2022-01-02 |
+| 4   | A        | 5        | 2022-01-03 |
+| 5   | B        | 8        | 2022-01-03 |
+| 6   | C        | 12       | 2022-01-04 |
+
+Si queremos obtener la cantidad total de ventas para cada producto, podemos utilizar la cláusula _GROUP BY_ de la siguiente manera:
+
+```sql
+SELECT producto, SUM(cantidad) AS total_ventas
+  FROM ventas
+  GROUP BY producto;
+  -- Lo primero que hace es agrupar GROUP BY despues SUMA  y así.
+```
+
+Esta consulta devuelve el siguiente resultado:
+
+| producto | total_ventas |
+| -------- | ------------ |
+| A        | 15           |
+| B        | 23           |
+| C        | 32           |
+
+Ahora, supongamos que queremos obtener solamente los productos que han tenido un total de ventas mayor a 20. Para ello, podemos utilizar la cláusula _HAVING_ de la siguiente manera:
+
+```sql
+SELECT producto, SUM(cantidad) AS total_ventas
+  FROM ventas
+  GROUP BY producto
+  HAVING SUM(cantidad) > 20;
+```
+
+Esta consulta devuelve el siguiente resultado:
+
+| producto | total_ventas |
+| -------- | ------------ |
+| B        | 23           |
+| C        | 32           |
+
+Como puedes ver, la cláusula _HAVING_ nos permite filtrar los resultados de una consulta que utiliza GROUP BY, basándonos en una condición que se aplica a los resultados agrupados. En este caso, hemos filtrado los productos que han tenido un total de ventas mayor a 20.
+
+El HAVING es como la cláusula WHERE pero de las columnas calculadas
+
+### DISTINCT
+
+La cláusula _DISTINCT_ se utiliza en _SQL_ para eliminar las filas duplicadas de un conjunto de resultados.
+
+Supongamos que tenemos la siguiente tabla llamada "_Clientes_":
+
+| id  | nombre | apellido  |
+| --- | ------ | --------- |
+| 1   | Juan   | Perez     |
+| 2   | Ana    | Garcia    |
+| 3   | Juan   | Martinez  |
+| 4   | Maria  | Rodriguez |
+| 5   | Ana    | Jimenez   |
+
+Si queremos obtener la lista de nombres únicos de los clientes, podemos utilizar la cláusula DISTINCT de la siguiente manera:
+
+```sql
+SELECT DISTINCT nombre
+  FROM Clientes;
+```
+
+Esta consulta devuelve los nombres únicos de los clientes de la tabla "_Clientes_", sin importar si tienen apellidos diferentes. El resultado sería el siguiente:
+
+| nombre |
+| ------ |
+| Juan   |
+| Ana    |
+| Maria  |
+
+Como puedes ver, la cláusula _DISTINCT_ nos permite obtener resultados únicos y reducir la cantidad de datos redundantes en las consultas _SQL_.
+
+
+### _ORDER BY_
+
+
+La cláusula _ORDER BY_ en _SQL_ se utiliza para ordenar los resultados de una consulta en un orden específico. Se puede ordenar por una o varias columnas y en orden ascendente (_ASC_) o descendente (_DESC_).
+
+Por ejemplo, si tenemos una tabla "_empleados_" con las columnas "nombre", "apellido" y "salario", podemos ordenar los registros por el salario de forma ascendente con la siguiente consulta:
+
+```sql
+SELECT * FROM empleados ORDER BY salario ASC;
+```
+
+Esto nos devolvería todos los registros de la tabla "_empleados_" ordenados por el salario de forma ascendente. Si quisiéramos ordenarlos de forma descendente, cambiaríamos "_ASC_" por "_DESC_":
+
+```sql
+SELECT * FROM empleados ORDER BY salario DESC;
+
+
+-- La consulta siempre nos va a arojar enbase al orden que se ha insertado los registos 
+
+-- primero ordena MARCA despues ordena por MODELO, esto se nota en campos repetidos el cual si tienen el mismo nombre, lo va ordenar respetando el ID
+select nombre, precio, max(precio) as precio_máximo from productos group by precio, nombre having precio_máximo > 10000 order by nombre;
+
+-- La cláusula ORDER BY es la que tiene que ir al final, esto por el orden de ejecucion
+```
+
+De esta manera, se pueden ordenar los resultados de una consulta de acuerdo a un criterio específico.
+
+
+### FUNCIONES DE CADENAS DE TEXTO.
+
+```sql
+
+
+-- estas funciones nos puede ayudar a transformar la información para un reporte.
+
+select ('hola mundo');
+-- convierte todo a minisculas
+select lower('hola mundo');
+select lcase('hola mundo');
+-- Convierte todo a mayuscula
+select ucase('hola mundo');
+select upper('hola mundo');
+-- extraer pedazos de una cadena
+select left('hola mundo', 3);
+select right ('hola mundo', 3);
+-- obteniendo la longitud del caracter
+select length ('hola mundo');
+-- repetir
+select repeat('hola mundo', 2);
+-- invirtiendo cadena de texto
+select reverse('hola mundo');
+-- remplazo de caracteres
+select replace('hola mundo', 'o', 'x');
+-- cuando el usuario deja espacios en blanco adelante o atras
+select ltrim('     hola mundo');
+select rtrim('hola mundo     ');
+select trim('       hola mundo     ');
+-- para conatenar y para crear url amigable
+select concat('hola mundo', ' desde',' bolivia');
+select concat_ws('-', 'hola','mundo','desde','Bolivia');
+select upper('hola mundo');
+select upper('hola mundo');
+select upper('hola mundo');
+select upper('hola mundo');
+select upper('hola mundo');
+
+select upper(nombre), lower(descripcion), precio from productos;
+```
+
+
+### _LIMIT_
+
+La cláusula _LIMIT_ se utiliza en _SQL_ para limitar el número de resultados devueltos en una consulta. Permite especificar el número de filas que se deben recuperar desde la tabla, lo que puede ser útil en consultas que devuelven grandes cantidades de datos.
+
+La sintaxis básica de la cláusula _LIMIT_ es la siguiente:
+
+```sql
+SELECT columna_1, columna_2, ..., colunmna_n
+  FROM tabla
+  LIMIT cantidad_de_filas;
+```
+
+Donde **cantidad_de_filas** es el número máximo de filas que se deben devolver en la consulta.
+
+También es posible especificar un punto de inicio desde el cual se deben recuperar las filas, lo que se logra utilizando dos valores separados por una coma. El primer valor especifica el índice de la primera fila que se debe devolver, y el segundo valor especifica el número máximo de filas que se deben devolver.
+
+```sql
+SELECT columna_1, columna_2, ..., columna_n
+  FROM tabla
+  LIMIT indice_inicio, cantidad_de_filas;
+```
+
+Donde **indice_inicio** es el índice de la primera fila que se debe devolver, y **cantidad_de_filas** es el número máximo de filas que se deben devolver a partir de la fila de inicio.
+
+Por ejemplo, la siguiente consulta devuelve los primeros 10 registros de la tabla "_clientes_":
+
+```sql
+SELECT * FROM clientes
+  LIMIT 10;
+```
+
+Y la siguiente consulta devuelve los registros 11 al 20 de la tabla "_clientes_":
+
+```sql
+SELECT * FROM clientes
+  LIMIT 10, 10;
+```
+
+Es importante tener en cuenta que el uso de la cláusula _LIMIT_ puede afectar el rendimiento de la consulta, especialmente cuando se utiliza con tablas grandes.
+
+## Sintaxis SQL Avanzada
+
+### Índices
+
+
+3: 39
+
