@@ -461,7 +461,101 @@ SELECT * FROM tabla WHERE campo_1 != 'valor_1';
 
 ### UPDATE
 
+Siempre agregar la clausula **_WHERE_** para evitar actualizar toda la tabla:
 
-2:26
+```sql
+UPDATE tabla
+  SET campo_1 = 'valor_1', campo_2 = 'valor_2', ..., campo_n = valor_n
+  WHERE campo = valor;
+```
+
+### DELETE
+
+Siempre agregar la clausula **_WHERE_** para evitar eliminar toda la tabla:
+
+**[NO TE OLVIDES DEL WHERE EN EL DELETE FROM (canción)](https://youtube.com/watch?v=i_cVJgIz_Cs)**
+
+```sql
+DELETE FROM tabla WHERE campo = valor;
+```
+
+Si quieres resetear una tabla para volver a inicializar los id's ejecuta este comando que borra y reinicia la tabla:
+
+```sql
+  truncate table nombre_tabla;
+```
+
+#### CREANDO LA TABLA PRODUCTOS
+
+```sql
+create table  productos (
+producto_id INT unsigned auto_increment primary key,
+nombre varchar(50) not null,
+descripcion varchar(50),
+precio decimal(7,2),
+cantidad int unsigned
+);
+
+-- 7 represneta las posiciones totales, y 2 representa los digitos flotantes el resultado seria 00000,00
 
 
+insert into productos (nombre, descripcion, precio, cantidad) values
+("Computadora", "Mackbook Air M2", 29999.99, 5),
+("Celular", "Phone 1", 11999.99, 15),
+("Cámara Web", "Logitech c920", 1500, 13),
+("Micrófono", "Blue Yeti", 2500, 19),
+("Audífonos", "Audífonos Bose", 6500, 10);
+
+```
+
+
+### Operaciones aritméticas
+
+```sql
+select 6 + 5 as calculo;
+select 6 - 5 as calculo;
+select 6 * 5 as calculo;
+select 6 / 5 as calculo;
+select 6 / 5 as calculo;
+```
+
+### Funciones aritméticas o matemáticas.
+
+```sql
+select mod(4,2);
+select mod(5,2);
+-- saca el modulo o el resto de una division
+select ceiling (7.1);
+-- lo redondea al numero que sique
+select floor(7.9);
+-- lo baja a 7
+select round(7.5); 
+-- redondeo tradicional
+select round(7.4999); 
+select power(2, 6);
+-- potencia
+select sqrt(81);
+-- raiz cuadrada
+```
+
+### Columnas calculadas
+
+```sql
+-- Columnas calculadas
+
+
+select nombre, precio, cantidad, (precio * cantidad) as ganancia from productos;
+
+# Funciones de agrupamiento
+select max(precio) as precio_máximo  from productos;
+select min(precio) as precio_máximo  from productos;
+select sum(precio) * sum(cantidad) as ganancia_total from productos;
+select avg(precio) as precio_promedio from productos;
+```
+
+## SENTENCIAS DE AGRUPAMIENTO
+
+### GROUP BY
+
+
+2:58
