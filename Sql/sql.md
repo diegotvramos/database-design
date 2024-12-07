@@ -818,6 +818,54 @@ Es importante tener en cuenta que el uso de la cláusula _LIMIT_ puede afectar e
 
 ### Índices
 
+Haciendo metáfora a un indice del libro, es similar.
+El declarar indices en nuestra base de datos nos puede mejorar la velocidad a la que nosotros hacemos búsquedas.
+No va ser lo mismo a la velocidad a la que se ejecute un query con la llave primaria, que a la que se ejecute con cualquiera de los otros campos que no son un indice.
+Ocupan espacio de almacenamiento en el disco duro de la base de datos. 
 
-3: 39
+En _SQL_ existen varios tipos de índices, los principales son:
+
+- Índice único (_**UNIQUE**_): asegura que los valores de la columna indexada sean únicos en la tabla.
+- Índice primario (_**PRIMARY KEY**_): es un tipo especial de índice único que identifica de forma única cada fila de una tabla.
+- Índice secundario (_**INDEX**_): es un índice que no tiene restricciones de unicidad y se utiliza para mejorar el rendimiento de consultas que involucran la columna indexada.
+- Índice de texto completo (_**FULLTEXT**_): se utiliza para hacer búsquedas de texto completo en columnas de texto grandes, como _VARCHAR_ y _TEXT_.
+
+#### Ejemplo
+
+```sql
+
+-- primary key y UNIQUE son dos de los inices especiales que al momento de ponerlo a un campo, pues en ese momento se vuelve un indice.
+-- Pero nosotros podemos generar nuestros propios indices de manera personalizada  y eso se dá en la difinición de nuestra tabla.
+
+CREATE TABLE una_tabla(
+  campo_id INTEGER UNSIGNED PRIMARY KEY,
+  campo_unico VARCHAR(80) UNIQUE,
+  campo_index VARCHAR(80),
+  campo_3 VARCHAR(80),
+  campo_4 VARCHAR(80),
+  INDEX i_campo_index(campo_index)
+  INDEX nombre_tabla (campo_3, campo_4)
+  FULLTEXT INDEX fi_campo_fulltext(campo_3, campo_4)
+);
+-- El indice full text lo denominé "indice tipo busqueda Google"
+
+-- ¿Cómo podria agregar indice a una tabla sin eliminar la tabla?
+
+
+
+
+
+
+```
+
+Ejecutando una consulta de tipo _FULLTEXT_
+
+```sql
+SELECT * FROM una_tabla
+  WHERE MATCH(campo_3, campo_4)
+  AGAINST('una_búsqueda' IN BOOLEAN MODE);
+```
+
+
+3: 58
 
