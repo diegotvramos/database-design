@@ -848,13 +848,8 @@ CREATE TABLE una_tabla(
   FULLTEXT INDEX fi_campo_fulltext(campo_3, campo_4)
 );
 -- El indice full text lo denominé "indice tipo busqueda Google"
-
--- ¿Cómo podria agregar indice a una tabla sin eliminar la tabla?
-
-
-
-
-
+-- Yo puedo crear un solo indice pero hacer una referencia a cada uno de los campos
+-- Si quieres hacer un query de tipo buscador en varios campos precedidos del indice FULLTEXT 
 
 ```
 
@@ -864,8 +859,88 @@ Ejecutando una consulta de tipo _FULLTEXT_
 SELECT * FROM una_tabla
   WHERE MATCH(campo_3, campo_4)
   AGAINST('una_búsqueda' IN BOOLEAN MODE);
+  -- tienes que mencionar a todo los cmapos indexados con fulltext
+-- El fulltext es ideal cuando vas a buscar en una tabla, yo no lo usaria en tablas relacionadas
+```
+### MODIFICACIÓN DE INICES 
+
+¿Cómo agregar o eliminar indices, Campos únicos  e inclusso llaves principales sin eliminar la tabla?
+```sql
+-- creamos una tabla "sin llave primaria"
+CREATE TABLE conductores ( 
+conductor_id INT unsigned, 
+nombre VARCHAR(50), 
+apellidos VARCHAR(50), 
+ci VARCHAR(20), 
+calle VARCHAR(100), 
+municipio VARCHAR(50), 
+celular VARCHAR(15), 
+email VARCHAR(100), 
+categoria_licencia CHAR(1), 
+dependencia VARCHAR(100), 
+observaciones TEXT
+);
+
+select * from conductores;
+
+show index from conductores
+
+alter table conductores add constraint pk_conductor_id primary key (conductor_id);
+-- le debemos dar un alias a esa llave principal en este caso "pk_conductor_id", 
+-- si una tabla no tien primary key no puees poner el "AUTO_INCREMENT" (no es buena práctica eliminar el primary key)
+alter table conductores modify column conductor_id INT  auto_increment;
+-- añadiendo el UNIQUE al campo de la tabla
+alter table conductores add constraint up_ci unique (ci);
+alter table conductores drop constraint up_ci;
+-- Añadiendo un index normal
+alter table conductores add index i_apellidos (apellidos);
+alter table conductores drop index i_apellidos;
+-- añadiendo varios inices.
+alter table conductores add index i__email_categoria_licencia (email, categoria_licencia);
+alter table conductores drop index i__email_categoria_licencia;
+
+-- Añadiendo full text.
+alter table conductores add fulltext index fi_search (celular, dependencia);
+-- Eliminado un inice
+alter table conductores drop index fi_search;
 ```
 
+### _Foreign Keys_
 
-3: 58
+En _SQL_, una llave foránea (_Foreign Key_) es un campo o conjunto de campos en una tabla que hacen referencia a una clave única en otra tabla, estableciendo así una relación entre ambas tablas. Se utilizan para mantener la integridad referencial de los datos, lo que significa que garantizan que los datos en las tablas relacionadas sean coherentes y precisos.
+
+#### Sintaxis
+
+Se define dentro de una tabla de la siguiente forma:
+
+```sql
+FOREIGN KEY (nombre_campo) REFERENCES tabla_referencia(campo_referencia)
+```
+
+#### Ejemplo
+
+```sql
+CREATE TABLE lenguajes (
+  lenguaje_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  lenguaje VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE entornos (
+  entorno_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  entorno VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE frameworks (
+  framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  framework VARCHAR(30) NOT NULL,
+  lenguaje INT UNSIGNED,
+  entorno INT UNSIGNED,
+  FOREIGN KEY (lenguaje) REFERENCES lenguajes(lenguaje_id),
+  FOREIGN KEY (entorno) REFERENCES entornos(entorno_id)
+);
+```
+
+### JOINS
+
+4:24
 
