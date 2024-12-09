@@ -1016,8 +1016,198 @@ SELECT t1.campo_1, t1.campo_2, t1.campo_3, (
     WHERE t2.campo_1 = t1.campo_1
   ) AS sub_consulta_campo
   FROM tabla_1 AS t1;
+
+-- Algunos ejemplos:
+-- por cada tipo de pieza muestrame la cantidad vendida.
+select tipo_pieza, 
+(select sum(vn.cantidad) from ventas vn where vn.pieza_id = pzn.pieza_id)
+as cantidad_vendida 
+from piezas_nuevas pzn;
+
+
+-- ¿Cuantos artículos compré de cada proveedor?
+
+select prov.proveedor_id, prov.nombre,
+(select count(*) from compras comp where comp.proveedor_id = prov.proveedor_id )
+as tipos_de_articulos
+from proveedores prov;
+
+```
+### Vistas
+
+Una vista es una tabla virtual que se deriva de una o más tablas existentes en una base de datos. En otras palabras, una vista no almacena datos físicamente, sino que es una consulta predefinida que se ejecuta cada vez que se accede a ella.
+
+La vista se define utilizando una consulta SELECT, y una vez definida, puede ser tratada como cualquier otra tabla en la base de datos, permitiendo que se realicen consultas, actualizaciones y eliminaciones de registros.
+
+Las vistas son útiles porque pueden proporcionar una capa adicional de abstracción para los usuarios que no necesitan conocer los detalles de la estructura de la base de datos subyacente.
+
+Por ejemplo, se puede crear una vista que presente solo ciertas columnas de una tabla, o que filtre los registros en función de ciertos criterios.
+
+Además, las vistas pueden ser utilizadas para simplificar consultas complejas, ya que una vista puede contener una consulta que combine datos de varias tablas. En lugar de tener que escribir la consulta completa cada vez, los usuarios pueden simplemente consultar la vista.
+
+```sql
+CREATE VIEW nombre_vista AS
+	SELECT * FROM tabla WHERE campo_1 = 'valor_1';
+
+DROP VIEW nombre_vista;
+
+SELECT * FROM nombre_vista;
+
+SHOW FULL TABLES IN nombre_bd WHERE TABLE_TYPE LIKE 'VIEW';
+
+-- Ejemplo:
+
+create view vista_proveedor_piezas as
+select prov.proveedor_id, prov.nombre,
+(select count(*) from compras comp where comp.proveedor_id = prov.proveedor_id )
+as tipos_de_articulos
+from proveedores prov;
+
+-- Para ver una vista
+select * from vista_compra_detallada;
+select * from vista_proveedor_piezas;
+
+-- Para eliminar una vista
+
+drop view vista_compra_detallada;
+
+-- Visualizar toda las vistas
+
+show full tables in curso_sql where table_type like 'VIEW'; -- OJO es en mayuscula lo que está entre comillas
+
+-- Consulta las vistas directamente desde el esquema de información:
+
+SELECT *
+FROM information_schema.VIEWS
+WHERE TABLE_SCHEMA = 'curso_sql'; 
+```
+Las Vistas son muy útiles para los reportes el cual será analizada por personas que toman las deciciones
+
+### Motores de Tablas
+
+Un motor de tablas (también conocido como motor de almacenamiento) en _SQL_ es el componente del sistema de gestión de bases de datos (_SGBD_) que se encarga de la forma en que se almacenan, recuperan y manipulan los datos en una base de datos.
+
+Los motores de tablas son responsables de la forma en que se organizan los datos físicamente en el disco, así como de cómo se accede a ellos y se realiza el mantenimiento de la base de datos.
+
+Cada motor de tablas tiene su propia forma de gestionar las tablas, los índices, los bloqueos, las transacciones y la concurrencia. Algunos motores de tablas son más adecuados para aplicaciones de alta concurrencia y transacciones complejas, mientras que otros son más adecuados para aplicaciones con menos concurrencia y consultas más simples.
+
+En MySQL, por ejemplo, existen varios motores de tablas disponibles, cada uno con sus propias características y limitaciones. Los motores de tablas más comunes son _InnoDB_, _MyISAM_, _MEMORY_, _CSV_ y _ARCHIVE_.
+
+_InnoDB_ es el motor de almacenamiento predeterminado en _MySQL_, y es compatible con transacciones y restricciones de clave foránea, lo que lo hace más adecuado para aplicaciones que requieren una alta integridad de los datos.
+
+_MyISAM_ es un motor de almacenamiento antiguo que ya no se recomienda su uso debido a sus limitaciones en cuanto a la integridad referencial y la seguridad de los datos.
+
+Los otros motores de tablas en _MySQL_ tienen características específicas, como la capacidad de almacenar datos en memoria, acceder a datos en archivos _CSV_ o comprimir datos.
+
+#### Ejemplo
+
+```sql
+CREATE TABLE armaduras_myisam (
+	armadura_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	armadura VARCHAR(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE armaduras_innodb (
+	armadura_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	armadura VARCHAR(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- en caso de que tu hosting compartido(GO DADY, HOSTINGER) que no tenga acualizado el MYSQL y siga utilizando el motor antiguo MyIsam 
+-- Puedes especificarlo de esta manera:
+
+SHOW TABLE STATUS FROM curso_sql WHERE Name = 'nombre_de_tu_tabla';
+
+use curso_sql;
+
+-- Si deseas ver el motor de almacenamiento de todas las tablas en una base de datos, puedes usar la siguiente consulta:
+
+SELECT TABLE_NAME, ENGINE
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA = 'curso_sql';
+
+-- Si estas trabajando con otro sistema gestor de base de datos diferentes a MYSQL
+-- Tienes que remitirte a la documentación  del sistema gestor y buscar: "ENGINE TABLES"
+```
+
+### Juego de Caracteres
+
+A la hora de registrar palabras y a la hora de decodificarla hacia la vista puede marcarte caracteres extraños en: Letras acentuadas, tildes, con dieresis la Ñ, puedes tener el juego de caracteres en UTF-8 EN html pero la base de datos tambien tiene su juego de caracteres Para que no tengas problemas con los caracteres ajenos al idioma ingles asi:
+
+```sql
+
+CREATE TABLE ventas (
+    venta_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    pieza_id INT unsigned,
+    usuario_id INT unsigned,
+    cantidad INT,
+    precio_total DECIMAL(10, 2),
+    fecha_venta DATE,
+    FOREIGN KEY (pieza_id) REFERENCES piezas_nuevas(pieza_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id)
+)engine=innoDB charset=utf8mb4;
+
+-- Consulta para el Conjunto de Caracteres de la Base de Datos
+SELECT 
+    SCHEMA_NAME, 
+    DEFAULT_CHARACTER_SET_NAME 
+FROM 
+    information_schema.SCHEMATA
+WHERE 
+    SCHEMA_NAME = 'curso_sql';
+
+
+-- Consulta para el Conjunto de Caracteres de las Tablas
+
+SELECT 
+    TABLE_NAME, 
+    TABLE_COLLATION 
+FROM 
+    information_schema.TABLES
+WHERE 
+    TABLE_SCHEMA = 'curso_sql';
+-- en las verciones modernas de MYSQL como la 7 u 8  no es necesario ejecutar esto: "engine=innoDB charset=utf8mb4;"
+```
+### Restricciones
+
+En _SQL_, las restricciones _ON DELETE_ y _ON UPDATE_ se utilizan para especificar qué acciones se deben realizar en una tabla relacionada cuando se realiza una operación de eliminación o actualización en la tabla principal.
+
+Las acciones que se pueden especificar para las restricciones _ON DELETE_ y _ON UPDATE_ son:
+
+- _CASCADE_: elimina o actualiza automáticamente los registros relacionados en la tabla relacionada.
+- _SET NULL_: establece los valores de la columna relacionada en _NULL_ cuando se elimina o actualiza un registro en la tabla principal.
+- _SET DEFAULT_: establece los valores de la columna relacionada en su valor predeterminado cuando se elimina o actualiza un registro en la tabla principal.
+- _RESTRICT_: evita la eliminación o actualización de un registro en la tabla principal si hay registros relacionados en la tabla relacionada.
+
+#### Ejemplo
+
+```sql
+CREATE TABLE lenguajes (
+  lenguaje_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  lenguaje VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE entornos (
+  entorno_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  entorno VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE frameworks (
+  framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  framework VARCHAR(30) NOT NULL,
+  lenguaje INT UNSIGNED,
+  entorno INT UNSIGNED,
+  FOREIGN KEY (lenguaje)
+    REFERENCES lenguajes(lenguaje_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  FOREIGN KEY (entorno)
+    REFERENCES entornos(entorno_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
 ```
 
 
-5:01
+
+5:30
 
