@@ -938,9 +938,86 @@ CREATE TABLE frameworks (
   FOREIGN KEY (lenguaje) REFERENCES lenguajes(lenguaje_id),
   FOREIGN KEY (entorno) REFERENCES entornos(entorno_id)
 );
+
+CREATE TABLE compras(
+    compra_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+    proveedor_id INT unsigned,
+    pieza_id INT unsigned,
+    cantidad INT,
+    precio_total DECIMAL(10, 2),
+    fecha_compra DATE,
+    FOREIGN KEY (proveedor_id) REFERENCES proveedores(proveedor_id),
+    FOREIGN KEY (pieza_id) REFERENCES piezas_nuevas(pieza_id)
+);
+
+
+-- por favor si el campo al que hacermos referencia su tipo de dato es "INT unsigned", no olvides poner "INT unsigned" en el campo foreign key de la tabla.
 ```
 
 ### JOINS
 
-4:24
+Los _JOINs_ en _SQL_ sirven para combinar filas de dos o más tablas basándose en un campo común entre ellas, devolviendo por tanto datos de diferentes tablas. Un _JOIN_ se produce cuando dos o más tablas se juntan en una sentencia _SQL_.
+
+Los más importantes son los siguientes:
+
+- _INNER JOIN_: Devuelve todas las filas cuando hay al menos una coincidencia en ambas tablas.
+- _LEFT JOIN_: Devuelve todas las filas de la tabla de la izquierda, y las filas coincidentes de la tabla de la derecha.
+- _RIGHT JOIN_: Devuelve todas las filas de la tabla de la derecha, y las filas coincidentes de la tabla de la izquierda.
+- _OUTER JOIN_: Devuelve todas las filas de las dos tablas, la izquierda y la derecha, también se llama _FULL OUTER JOIN_.
+
+![_SQL JOINs_](sql-joins.webp)
+
+```sql
+SELECT * FROM tabla_1 AS t1
+  INNER JOIN tabla_2 AS t2;
+
+SELECT * FROM tabla_1 AS t1
+  INNER JOIN tabla_2 AS t2
+  ON t1.a_campo = t2.a_campo;
+
+SELECT t1.campo_1, t1.campo_2, t1.campo_3, t2.campo_1, t2.campo_5
+  FROM tabla_1 AS t1
+  INNER JOIN tabla_2 AS t2
+  ON t1.campo_1 = t2.campo_5
+  WHERE t1.campo_1 = 'valor'
+  ORDER BY t1.campo_3 DESC;
+
+/* Con FULLTEXT */
+SELECT t1.campo_1, t1.campo_2, t2.campo_1, t2.campo_4
+  FROM tabla_1 AS t1
+  INNER JOIN tabla_2 AS t2
+  ON t1.campo_1 = t2.campo_4
+  WHERE MATCH(t1.campo_1, t1.campo_2, t2.campo_1, t2.campo_4)
+  AGAINST('una_búsqueda' IN BOOLEAN MODE);
+
+
+  -- Ejemplo para unir tres tablas:
+
+  select c.compra_id, p.nombre as nombre_proveedor, pzn.tipo_pieza, c.cantidad, c.precio_total, c.fecha_compra  from compras c
+inner join proveedores p on c.proveedor_id = p.proveedor_id
+inner join piezas_nuevas  pzn on c.pieza_id = pzn.pieza_id;
+```
+
+### Subconsultas
+
+Es una consulta dentro de otra:
+
+```sql
+SELECT t1.campo_1, t1.campo_2, (
+    SELECT COUNT(*)
+    FROM tabla_2 AS t2
+    WHERE t2.campo_1 = t1.campo_1
+  ) AS sub_consulta_campo
+  FROM tabla_1 AS t1;
+
+SELECT t1.campo_1, t1.campo_2, t1.campo_3, (
+    SELECT campo_1
+    FROM tabla_2 AS t2
+    WHERE t2.campo_1 = t1.campo_1
+  ) AS sub_consulta_campo
+  FROM tabla_1 AS t1;
+```
+
+
+5:01
 
