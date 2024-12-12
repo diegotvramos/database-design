@@ -1176,7 +1176,7 @@ Las acciones que se pueden especificar para las restricciones _ON DELETE_ y _ON 
 - _CASCADE_: elimina o actualiza automáticamente los registros relacionados en la tabla relacionada.
 - _SET NULL_: establece los valores de la columna relacionada en _NULL_ cuando se elimina o actualiza un registro en la tabla principal.
 - _SET DEFAULT_: establece los valores de la columna relacionada en su valor predeterminado cuando se elimina o actualiza un registro en la tabla principal.
-- _RESTRICT_: evita la eliminación o actualización de un registro en la tabla principal si hay registros relacionados en la tabla relacionada.
+- _RESTRICT_: evita la eliminación o actualización de un registro en la tabla principal si hay registros relacionados en la tabla relacionada. (VALOR POR DEFECTO EN MYSQL)
 
 #### Ejemplo
 
@@ -1190,6 +1190,42 @@ CREATE TABLE entornos (
   entorno_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   entorno VARCHAR(30) NOT NULL
 );
+
+
+CREATE TABLE frameworks (
+  framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  framework VARCHAR(30) NOT NULL,
+  lenguaje INT UNSIGNED,
+  FOREIGN KEY (lenguaje) REFERENCES lenguajes(lenguaje_id)
+);	
+
+delete from lenguajes where lenguaje_id = 3; -- no puedo eliminar por que tengo dependencias en otras tablas
+delete from lenguajes where lenguaje_id = 5; -- como no tengo valores relacionados con este ID, lo puedo eliminar.
+-- La restriccion la podemos definir a la hora de crear nuestras tablas
+CREATE TABLE frameworks (
+  framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  framework VARCHAR(30) NOT NULL,
+  lenguaje INT UNSIGNED,
+  FOREIGN KEY (lenguaje) REFERENCES lenguajes(lenguaje_id)
+  on delete restrict on update cascade 
+  -- Con esto estamos restringiendo la "Eliminacion(delete)" pero estamos permitiendo la actualización (update)
+  -- Al actualizar en cascada tambien lo actualiza en otras tablas el valor.
+);
+
+CREATE TABLE frameworks (
+  framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  framework VARCHAR(30) NOT NULL,
+  lenguaje INT UNSIGNED,
+  FOREIGN KEY (lenguaje) REFERENCES lenguajes(lenguaje_id)
+  on delete set null on update cascade 
+  -- Cuano se elimina iguala los valores a NULO
+  -- Y al ejecutar inner join pues ya no muestra por que ya no hay coincidencias pero están ahi por separado.
+);	
+
+-- RESTRISCCIONES MULTIPLES
+-- Las restricciones es por cada llave foranea (para update y delete el valor por defecto es RESTRIC)
+-- FORMULA GANADORA
+-- En eliminar Restringimos y en actualizar aplicamos CASCADA.
 
 CREATE TABLE frameworks (
   framework_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -1205,9 +1241,14 @@ CREATE TABLE frameworks (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
+
+select * from frameworks f
+inner join lenguajes l on f.lenguaje= l.lenguaje_id
+inner join entornos e on f.entorno= e.entorno_id;
+
 ```
 
 
 
-5:30
+6:10
 
