@@ -812,6 +812,23 @@ SELECT * FROM clientes
   LIMIT 10, 10;
 ```
 
+ejemplo:
+
+```sql
+-- LIMIT 
+
+-- Limita el número de registros que te va devolver  la base de datos
+-- Imagina que estás construyendo en la página web una paginación 
+
+select * from frameworks;
+select * from frameworks limit 2; -- (muestra los primeros dos)
+select * from frameworks limit 2, 2; -- (muestra entre rangos apartir del segundo y el segundo valor indica cuantos más voy a mostrar)
+select * from frameworks limit 4, 2;
+select * from frameworks limit 6, 2;
+select * from frameworks limit 8, 2;
+select * from frameworks limit 10, 2;
+```
+
 Es importante tener en cuenta que el uso de la cláusula _LIMIT_ puede afectar el rendimiento de la consulta, especialmente cuando se utiliza con tablas grandes.
 
 ## Sintaxis SQL Avanzada
@@ -1247,6 +1264,80 @@ inner join lenguajes l on f.lenguaje= l.lenguaje_id
 inner join entornos e on f.entorno= e.entorno_id;
 
 ```
+
+### Transacciones
+
+En _SQL_, una transacción es una secuencia de operaciones que se ejecutan como una sola unidad lógica e indivisible, como si fueran una única operación. Una transacción garantiza la integridad de los datos y la consistencia de la base de datos en caso de errores o fallas.
+
+Una transacción típica implica una serie de operaciones que se realizan en una base de datos, como agregar, modificar o eliminar registros en una o más tablas.
+
+Todas las operaciones de la transacción se realizan como una sola unidad, lo que significa que todas las operaciones deben completarse con éxito o ninguna de ellas debe ser efectiva.
+
+Para iniciar una transacción en _SQL_, se utiliza la sentencia _START TRANSACTION_. Luego, se realizan las operaciones de la transacción, y si todas ellas se ejecutan correctamente, se utiliza la sentencia _COMMIT_ para confirmar los cambios en la base de datos.
+
+En caso de que se produzca un error o falla en alguna de las operaciones, se utiliza la sentencia _ROLLBACK_ para deshacer todos los cambios y volver a un estado consistente de la base de datos.
+
+```sql
+START TRANSACTION;
+
+  INSERT INTO tabla_1 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+  INSERT INTO tabla_2 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+  INSERT INTO tabla_3 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+COMMIT;
+
+START TRANSACTION;
+
+  INSERT INTO tabla_1 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+  INSERT INTO tabla_2 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+  INSERT INTO tabla_3 (campo_1, campo_2, campo_3)
+    VALUES ('valor_1', 'valor_2', 'valor_3');
+
+ROLLBACK;
+
+/*TRANSACCIONES.*/
+
+select * from frameworks;
+
+
+start transaction;
+	update frameworks set framework = "vue.js" where  framework_id = 30;
+	delete from frameworks;	
+	insert into frameworks values (0, "Spring", 5, 2);
+rollback; -- Es como una banderita
+commit; 
+
+-- ROLLBACK echar para atras una transaccion 
+-- COMMIT confirma la transacción 
+-- Se puede hacer una especie de TRY CATCH para el manejo de errores pero esto se hace con el código BACKEND (php)
+-- En MySQL todavia no soporta TRY CATCH
+-- Actualmente, MySQL no tiene una estructura TRY...CATCH
+
+-- IMPORTANTE Cuando estas trabajando con un modelo relacional donde una operación
+/*implica afectar a varias tablas te conviene hacer "TRANSACCIÓNES"
+ por que si te quedas en un punto intermedio y no lograste hacer la transacción, pues vas a tener que ir a 
+ depurar los datos manualmente 
+*/	
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
