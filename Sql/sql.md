@@ -1330,16 +1330,231 @@ commit;
 ```
 
 
+### Encriptación
+
+En _SQL_ existen varias funciones de encriptación que se pueden utilizar para proteger la información sensible en las bases de datos.
+
+Algunas de las funciones de encriptación más comunes son:
+
+#### _MD5_
+
+Esta función convierte una cadena de caracteres en un valor _hash_ de 128 _bits_. El valor resultante es único para cada cadena de entrada y se utiliza comúnmente para almacenar contraseñas en la base de datos.
+
+```sql
+SELECT MD5('password');
+```
+
+#### _SHA1_
+
+Esta función también genera un valor _hash_, pero utiliza un algoritmo más seguro que _MD5_ y produce un valor _hash_ de 160 _bits_.
+
+```sql
+SELECT SHA1('password');
+```
+
+#### _SHA2_
+
+Esta función es similar a _SHA1_, pero permite especificar la longitud del valor hash generado (en _bits_). Se puede utilizar para crear valores _hash_ más largos y más seguros que _SHA1_.
+
+```sql
+SELECT SHA2('password', 256);
+```
+
+#### _AES_ENCRYPT_ y _AES_DECRYPT_
+
+Estas funciones se utilizan para encriptar y desencriptar datos utilizando el algoritmo _AES_.
+
+```sql
+SELECT AES_ENCRYPT('password', 'secret_key'),
+  AES_DECRYPT('encrypted_value', 'secret_key');
+```
+
+Es importante tener en cuenta que la encriptación no es una solución completa para la seguridad de la base de datos y se deben tomar otras medidas de seguridad para proteger la información sensible.
+
+#### Ejemplo
+
+```sql
+
+CREATE TABLE pagos_recurrentes(
+	cuenta VARCHAR(8) PRIMARY KEY,  -- 'varchar' por que no se va a realizar ninguana operación aritmética.
+	nombre VARCHAR(50) NOT NULL,
+	tarjeta BLOB -- sirve para almacenar datos encriptados(datos binarios no texto plano) o ficheros binarios(no es optimo)
+);
+
+INSERT INTO pagos_recurrentes VALUES
+-- toman algun valor de  campo único (correo, telefono...) Como segundo parametro de la "llave secreta"
+	('12345678', 'Jon', AES_ENCRYPT('1234567890123488', '12345678')),
+	('12345677', 'Irma', AES_ENCRYPT('1234567890123477', '12345677')),
+	('12345676', 'Kenai', AES_ENCRYPT('1234567890123466', '12345676')),
+  -- PARA MÍ no ES ético
+	('12345674', 'Kala', AES_ENCRYPT('1234567890123455', 'super_llave')),
+	('12345673', 'Miguel', AES_ENCRYPT('1234567890123444', 'super_llave'));
+
+SELECT * FROM pagos_recurrentes;
+
+-- PARA DESENCRIPTAR
+
+SELECT CAST(AES_DECRYPT(tarjeta, '12345678') AS CHAR) AS tdc, nombre
+	FROM pagos_recurrentes;
+
+SELECT CAST(AES_DECRYPT(tarjeta, 'super_llave') AS CHAR) AS tdc, nombre
+	FROM pagos_recurrentes;
+
+-- Cuando vayas a encriptar te sugiero el tipo de dato BLOB	por que te permite almacenar datos binarios.
+```
+
+### Procedimientos Almacenados
+
+Un procedimiento almacenado o _**Stored Procedure**_ en _SQL_ es un conjunto de instrucciones que se almacenan en la base de datos y se pueden llamar y ejecutar varias veces mediante una sola llamada al procedimiento.
+
+Estos procedimientos pueden aceptar parámetros de entrada y devolver valores de salida, y pueden ser utilizados para realizar operaciones complejas en la base de datos de manera eficiente y segura.
+
+Los procedimientos almacenados también pueden ser utilizados para encapsular lógica de negocio y reducir la complejidad de las aplicaciones cliente al mover la lógica de la base de datos al servidor.
+
+#### Sintaxis
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE nombre_procedimiento(
+  IN valor_entrada TIPO_DATO,
+  IN valor_entrada_2 TIPO_DATO,
+  OUT valor_salida TIPO_DATO
+)
+
+  BEGIN
+    Código del Procedimiento Almacenado
+  END //
+
+DELIMITER ;
+```
+
+Una vez creado el procedimiento almacenado, podemos llamarlo con el siguiente código:
+
+```sql
+CALL nombre_procedimiento();
+```
+
+Eliminar un procedimiento y mostrar los procedimientos de una base de datos:
+
+```sql
+DROP PROCEDURE nombre_procedimiento();
+
+SHOW PROCEDURE STATUS WHERE db = 'nombre_base_datos';
+```
+
+#### Ejemplo
+
+Primero creamos las tablas necesarias para el ejemplo del procedimiento:
+
+```sql
+CREATE TABLE suscripciones (
+  suscripcion_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  suscripcion VARCHAR(30) NOT NULL,
+  costo DECIMAL(5,2) NOT NULL
+);
+
+INSERT INTO suscripciones VALUES
+  (0, 'Bronce', 199.99),
+  (0, 'Plata', 299.99),
+  (0, 'Oro', 399.99);
+
+CREATE TABLE clientes (
+  cliente_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(30) NOT NULL,
+  correo VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE tarjetas (
+  tarjeta_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cliente INT UNSIGNED,
+  tarjeta BLOB,
+  FOREIGN KEY (cliente)
+    REFERENCES clientes(cliente_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE servicios(
+  servicio_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cliente INT UNSIGNED,
+  tarjeta INT UNSIGNED,
+  suscripcion INT UNSIGNED,
+  FOREIGN KEY(cliente)
+    REFERENCES clientes(cliente_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  FOREIGN KEY(tarjeta)
+    REFERENCES tarjetas(tarjeta_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  FOREIGN KEY(suscripcion)
+    REFERENCES suscripciones(suscripcion_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+```
+
+Ahora el código del procedimiento:
+
+```sql
+CREATE PROCEDURE sp_asignar_servicio(
+  IN i_suscripcion INT UNSIGNED,
+  IN i_nombre VARCHAR(30),
+  IN i_correo VARCHAR(50),
+  IN i_tarjeta VARCHAR(16),
+  OUT o_respuesta VARCHAR(50)
+)
+
+  BEGIN
+
+    DECLARE existe_correo INT DEFAULT 0;
+    DECLARE cliente_id INT DEFAULT 0;
+    DECLARE tarjeta_id INT DEFAULT 0;
+
+    START TRANSACTION;
+
+      SELECT COUNT(*) INTO existe_correo
+        FROM clientes
+        WHERE correo = i_correo;
+
+      IF existe_correo <> 0 THEN
+
+        SELECT 'Tu correo ya ha sido registrado' INTO o_respuesta;
+
+      ELSE
+
+        INSERT INTO clientes VALUES (0, i_nombre, i_correo);
+        SELECT LAST_INSERT_ID() INTO cliente_id;
+
+        INSERT INTO tarjetas
+          VALUES (0, cliente_id, AES_ENCRYPT(i_tarjeta, cliente_id));
+        SELECT LAST_INSERT_ID() INTO tarjeta_id;
+
+        INSERT INTO servicios VALUES (0, cliente_id, tarjeta_id, i_suscripcion);
+
+        SELECT 'Servicio asignado con éxito' INTO o_respuesta;
+
+      END IF;
+
+    COMMIT;
+
+  END //
+
+DELIMITER ;
+```
+
+Finalmente lo ejecutamos y vemos el resultado de la variable de respuesta y en las correspondientes tablas la inserción de datos:
+
+```sql
+CALL sp_asignar_servicio(2, 'Kenai', 'kenai@gmail.com', '1234567890123490', @res);
+SELECT @res;
+
+SELECT * FROM clientes;
+SELECT * FROM tarjetas;
+SELECT * FROM servicios;
+```
 
 
-
-
-
-
-
-
-
-
-
-6:10
+6:57
 
