@@ -1448,6 +1448,13 @@ SHOW PROCEDURE STATUS WHERE db = 'nombre_base_datos';
 Primero creamos las tablas necesarias para el ejemplo del procedimiento:
 
 ```sql
+
+-- En cualquier sistema informático que tenga que ver con cosas de finanzas/ventas
+-- una venta implica el registro en otras tablas
+
+-- puedo hacer el insert manual de esas tres instrucciones, entonces puedo crear un 'Estore procedure' 
+-- que me permita obtener esa lógica y nada más mostrar un mensaje de que la transaccion se ejectuó correctamente
+
 CREATE TABLE suscripciones (
   suscripcion_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   suscripcion VARCHAR(30) NOT NULL,
@@ -1498,6 +1505,16 @@ CREATE TABLE servicios(
 Ahora el código del procedimiento:
 
 ```sql
+
+-- Sintaxis:
+
+-- vamos a usar un delimitador para ejecutar varias instrucciones simultaneamente. 
+-- para el delimitador utilizas cualquier caracter especial ($ o //)
+
+-- para ejecutar de golpe (ALT + X) tenelo en un script limpio
+
+delimiter // -- respeta espacios
+
 CREATE PROCEDURE sp_asignar_servicio(
   IN i_suscripcion INT UNSIGNED,
   IN i_nombre VARCHAR(30),
@@ -1507,7 +1524,7 @@ CREATE PROCEDURE sp_asignar_servicio(
 )
 
   BEGIN
-
+    -- declarando variables
     DECLARE existe_correo INT DEFAULT 0;
     DECLARE cliente_id INT DEFAULT 0;
     DECLARE tarjeta_id INT DEFAULT 0;
@@ -1523,8 +1540,9 @@ CREATE PROCEDURE sp_asignar_servicio(
         SELECT 'Tu correo ya ha sido registrado' INTO o_respuesta;
 
       ELSE
-
+        -- significa que es un usuario nuevo
         INSERT INTO clientes VALUES (0, i_nombre, i_correo);
+        -- nos devuelve el ultimo id que haya sido registrado en la tabla que le indiquemos
         SELECT LAST_INSERT_ID() INTO cliente_id;
 
         INSERT INTO tarjetas
@@ -1547,12 +1565,102 @@ DELIMITER ;
 Finalmente lo ejecutamos y vemos el resultado de la variable de respuesta y en las correspondientes tablas la inserción de datos:
 
 ```sql
+-- (i_suscripcion, i_nombre, i_correo, i_tarjeta, o_respuesta)
 CALL sp_asignar_servicio(2, 'Kenai', 'kenai@gmail.com', '1234567890123490', @res);
+-- la respuesta almacenala en la variable 'RES'
 SELECT @res;
 
 SELECT * FROM clientes;
 SELECT * FROM tarjetas;
 SELECT * FROM servicios;
+
+-- Ve lo poderoso que puede ser los STORE PROCEDURE para distribuir la lógica de negocio
+-- Yo los apoyo, hay gente que no les gusta
+```
+
+### Disparadores
+
+Un disparador o _**Trigger**_ es un objeto que se utiliza para ejecutar automáticamente una acción en respuesta a ciertos eventos en una base de datos, como _INSERT_, _UPDATE_ o _DELETE_ en una tabla específica.
+
+Los disparadores se pueden utilizar para asegurarse de que ciertas acciones se realicen automáticamente después de que se realice un cambio en una tabla, o para evitar que se realicen ciertas acciones.
+
+Por ejemplo, un disparador se puede utilizar para actualizar automáticamente una tabla de resumen después de que se realice un cambio en una tabla de detalles, o para evitar que se elimine un registro importante de una tabla.
+
+#### Sintaxis
+
+```sql
+DELIMITER //
+CREATE TRIGGER nombre_disparador
+  [BEFORE | AFTER] [INSERT | UPDATE | DELETE]
+  ON nombre_tabla
+  FOR EACH ROW
+
+  BEGIN
+    Código del Disparador
+  END //
+
+DELIMITER ;
+```
+
+Eliminar un disparador y mostrar los disparadores de una base de datos:
+
+```sql
+DROP TRIGGER nombre_disparador;
+
+SHOW TRIGGERS FROM base_de_datos;
+```
+
+#### Ejemplo
+
+Para el ejemplo de este disparador, seguiremos usando el código de ejemplo de los procedimeintos almacenados, primero creamos una tabla donde se almacene el resultado de nuestro disparador:
+
+```sql
+CREATE TABLE actividad_clientes(
+  ac_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cliente INT UNSIGNED,
+  fecha DATETIME,
+  FOREIGN KEY (cliente)
+    REFERENCES clientes(cliente_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+```
+
+Ahora creamos nuestro disparador:
+
+```sql
+
+-- se ejecuta por un evento.
+-- CUANDO YO CREE UN NUEVO servicio, automáticamente registre a la tabla (actividad_clientes) el LOG.
+CREATE TRIGGER tg_actividad_clientes
+  AFTER INSERT
+  ON clientes -- nombre de la tabla ala que va estár vinculado este disparador 
+  FOR EACH ROW -- por cada fila
+
+  BEGIN
+    -- NEW guarda el objeto que inicio el evento, NOW devuelve la hora y la fecha actual
+    INSERT INTO actividad_clientes VALUES (0, NEW.cliente_id, NOW());
+
+  END //
+
+DELIMITER ;
+
+-- servicios que nos cobran de forma mensual o recurrente utilizan los triggers para cortarte o restringirte el acceso al servicio
+-- en caso de que no hayas pagado
+
+```
+
+Finalmente ejecutamos nuevamente el ejemplo del procedimiento almacenado y en cuanto se haga el _INSERT_ a la tabla "_clientes_", el disparador se lanzará automáticamente.
+
+```sql
+CALL sp_asignar_servicio(2, 'vadym', 'vadym@gmail.com', '1234567890123490', @res);
+SELECT @res;
+```
+
+Para comprobar que el disparador se ejecuto revisamos la tabla "_actividad_clientes_":
+
+```sql
+SELECT * FROM actividad_clientes;
 ```
 
 
